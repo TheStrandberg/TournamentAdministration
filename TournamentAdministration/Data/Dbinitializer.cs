@@ -9,7 +9,7 @@ namespace TournamentAdministration.Data
 {
     public class Dbinitializer
     {
-        public static void Initialize(TournamentAdminContext database, AccessControl accessControl)
+        public static void Initialize(TournamentAdminContext database)
         {
             database.Venue.RemoveRange();
 
