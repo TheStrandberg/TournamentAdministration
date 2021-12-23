@@ -34,6 +34,7 @@ namespace TournamentAdministration
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<TournamentAdminContext>();
             services.AddRazorPages();
+            services.AddControllers();
 
             services.AddTransient<AccessControl>();
         }
