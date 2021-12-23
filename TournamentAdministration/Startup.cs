@@ -36,6 +36,7 @@ namespace TournamentAdministration
             services.AddRazorPages();
             services.AddControllers();
 
+            services.AddHttpContextAccessor();
             services.AddTransient<AccessControl>();
         }
 

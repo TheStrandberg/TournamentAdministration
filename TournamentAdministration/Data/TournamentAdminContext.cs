@@ -15,5 +15,8 @@ namespace TournamentAdministration.Data
         }
 
         public DbSet<Tournament> Tournament { get; set; }
+        public DbSet<Venue> Venue { get; set; }
+        public DbSet<Game> Game { get; set; }
+        public DbSet<Player> Player { get; set; }
     }
 }

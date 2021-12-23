@@ -22,7 +22,12 @@ namespace TournamentAdministration.Pages.Tournaments
             this.accessControl = accessControl;
         }
 
-        public Venue Venue { get; set; }
+        public List<Venue> Venues { get; set; }
+
+        private async Task GetVenues()
+        {
+            //Venues = await database.Venues
+        }
 
         public void OnGet()
         {

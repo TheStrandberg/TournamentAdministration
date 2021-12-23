@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TournamentAdministration.Migrations
 {
-    public partial class first : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace TournamentAdministration.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,16 +78,16 @@ namespace TournamentAdministration.Migrations
                 name: "Venue",
                 columns: table => new
                 {
-                    Venue_ID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Venue = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ID = table.Column<int>(type: "int", nullable: true),
+                    Venue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CoordinateID = table.Column<int>(type: "int", nullable: true),
                     Latitude = table.Column<double>(type: "float", nullable: true),
                     Longitude = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Venue", x => x.Venue_ID);
+                    table.PrimaryKey("PK_Venue", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,7 +227,7 @@ namespace TournamentAdministration.Migrations
                         name: "FK_Tournament_Venue_VenueID",
                         column: x => x.VenueID,
                         principalTable: "Venue",
-                        principalColumn: "Venue_ID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
