@@ -1,0 +1,18 @@
+﻿@page
+@model TournamentAdministration.Pages.Tournaments.CreateModel
+}
+
+<div class="text-center">
+    <h1 class="display-4">Create Tournament</h1>
+</div>
+<div class="text-left">
+    <h2>Tournament Name</h2>
+    <input type="text" />
+    <h2>Venue</h2>
+    <select name="venue">
+        <option value="">Select a venue</option>
+        <option value="1">Your house</option>
+        <option value="2">My house</option>
+    </select>
+    <a asp-page="/Venues/Create">Add Venue</a>
+</div>
