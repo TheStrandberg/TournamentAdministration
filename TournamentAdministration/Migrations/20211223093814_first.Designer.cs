@@ -10,7 +10,7 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20211223091502_first")]
+    [Migration("20211223093814_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,8 +245,8 @@ namespace TournamentAdministration.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
@@ -320,11 +320,11 @@ namespace TournamentAdministration.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Venue_ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("VenueName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("Venue");
 
                     b.HasKey("ID");
@@ -432,7 +432,7 @@ namespace TournamentAdministration.Migrations
 
                             b1.Property<int>("ID")
                                 .HasColumnType("int")
-                                .HasColumnName("ID");
+                                .HasColumnName("CoordinateID");
 
                             b1.Property<double>("Latitude")
                                 .HasColumnType("float")

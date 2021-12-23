@@ -10,8 +10,8 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20211223092020_second")]
-    partial class second
+    [Migration("20211223101121_classfix")]
+    partial class classfix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -323,6 +323,7 @@ namespace TournamentAdministration.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("VenueName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Venue");
@@ -450,7 +451,8 @@ namespace TournamentAdministration.Migrations
                                 .HasForeignKey("VenueID");
                         });
 
-                    b.Navigation("Coordinate");
+                    b.Navigation("Coordinate")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

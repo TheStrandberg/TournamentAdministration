@@ -16,7 +16,9 @@ namespace TournamentAdmin.Models
         [Required, Column(TypeName="date")]
         public DateTime EventTime { get; set; }
         public List<Player> Players { get; set; }
+        [Required]
         public Game Game { get; set; }
+        [Required]
         public Venue Venue {get;set;}
         [Required]
         public string UserID { get; set; }
