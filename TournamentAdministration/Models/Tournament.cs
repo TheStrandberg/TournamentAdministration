@@ -11,7 +11,9 @@ namespace TournamentAdmin.Models
     public class Tournament
     {
         public int ID { get; set; }
+        [Required, MaxLength(100)]
         public string TournamentName { get; set; }
+        [Required, Column(TypeName="date")]
         public DateTime EventTime { get; set; }
         public List<Player> Players { get; set; }
         public Game Game { get; set; }

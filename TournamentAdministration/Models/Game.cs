@@ -9,7 +9,7 @@ namespace TournamentAdmin.Models
     public class Game
     {
         public int ID { get; set; }
-        [Required, MaxLength(50)]
+        [Required, MaxLength(100)]
         public string Title { get; set; }
     }
 }
