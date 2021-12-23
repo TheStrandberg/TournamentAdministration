@@ -7,7 +7,7 @@
 <div class="text-left">
     <form method="post">
         <h2>Tournament Name</h2>
-        <input type="text" placeholder="Name of your tournament" />
+        <input type="text" placeholder="Name of your tournament" asp-for="Tournament.TournamentName"/>
         <h2>Venue</h2>
         <select name="venue">
             <option value="">Select a venue</option>
@@ -27,7 +27,7 @@
         </select>
         <p>Not in list? - <a asp-page="/Games/Create">Add Game</a></p>
         <h2>Date</h2>
-        <input type="date" />
-        <button type="submit">Create Tournament!</button>
+        <input type="date" asp-for="Tournament.EventTime"/>
+            <button type="submit">Create Tournament!</button>
     </form>
 </div>
