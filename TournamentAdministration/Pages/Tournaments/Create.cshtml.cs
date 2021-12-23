@@ -25,6 +25,21 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Venue> Venues { get; set; }
         public List<Game> Games { get; set; }
 
+        public Tournament Tournament { get; set; }
+
+        private void CreateEmptyTournament()
+        {
+            Tournament = new Tournament
+            {
+                UserID = accessControl.LoggedInUserID
+            };
+        }
+
+        public void OnGet()
+        {
+            CreateEmptyTournament();
+        }
+
         private async Task GetVenues()
         {
             Venues = await database.Venue.ToListAsync();
@@ -33,6 +48,27 @@ namespace TournamentAdministration.Pages.Tournaments
         private async Task GetGames()
         {
             Games = await database.Game.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostAsync(Tournament tournament)
+        {
+            CreateEmptyTournament();
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            Tournament.TournamentName = tournament.TournamentName;
+            Tournament.EventTime = tournament.EventTime;
+            Tournament.Game = tournament.Game;
+            //Tournament.Players = tournament.Players;
+            Tournament.UserID = tournament.UserID;
+            tournament.Venue = tournament.Venue;
+
+            await database.Tournament.AddAsync(Tournament);
+            await database.SaveChangesAsync();
+            return RedirectToPage("./Details", new { id = Tournament.ID });
         }
 
         public async Task<IActionResult> OnGetAsync()
