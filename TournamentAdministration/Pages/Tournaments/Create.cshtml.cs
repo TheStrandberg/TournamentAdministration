@@ -23,14 +23,23 @@ namespace TournamentAdministration.Pages.Tournaments
         }
 
         public List<Venue> Venues { get; set; }
+        public List<Game> Games { get; set; }
 
         private async Task GetVenues()
         {
-            //Venues = await database.Venues
+            Venues = await database.Venue.ToListAsync();
         }
 
-        public void OnGet()
+        private async Task GetGames()
         {
+            Games = await database.Game.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            await GetVenues();
+            await GetGames();
+            return Page();
         }
     }
 }

@@ -5,12 +5,25 @@
     <h1 class="display-4">Create Tournament</h1>
 </div>
 <div class="text-left">
-    <h2>Tournament Name</h2>
-    <input type="text" />
-    <h2>Venue</h2>
-    <select name="venue">
-        <option value="">Select a venue</option>
-        @*@foreach (var venue in Model.Venue)*@
-    </select>
-    <a asp-page="/Venues/Create">Add Venue</a>
+    <form method="post">
+        <h2>Tournament Name</h2>
+        <input type="text" />
+        <h2>Venue</h2>
+        <select name="venue">
+            <option value="">Select a venue</option>
+            @foreach (var venue in Model.Venues)
+            {
+                <option value=@venue.ID>@venue.VenueName</option>
+            }
+        </select>
+        <a asp-page="/Venues/Create">Add Venue</a>
+        <h2>Game</h2>
+        <select name="game">
+            <option value="">Select a game</option>
+            @foreach (var game in Model.Games)
+            {
+                <option value=@game.ID>@game.Title</option>
+            }
+        </select>
+    </form>
 </div>
