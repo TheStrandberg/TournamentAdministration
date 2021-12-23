@@ -26,11 +26,13 @@ namespace TournamentAdministration.Pages.Tournaments
 
         private async Task GetVenues()
         {
-            //Venues = await database.Venues
+            Venues = await database.Venue.ToListAsync();
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            await GetVenues();
+            return Page();
         }
     }
 }
