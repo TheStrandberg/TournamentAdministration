@@ -1,4 +1,20 @@
 ﻿@page
 @model TournamentAdministration.Pages.Venues.CreateModel
-@{
-}
+
+<div class="text-center">
+    <h1 class="display-4">Add Venue</h1>
+</div>
+<div class="text-left">
+    <form method="post">
+        <h2>Venue Name</h2>
+        <input type="text" placeholder="Venue Name" asp-for="Venue.VenueName" />
+
+        <h2>Longitude</h2>
+        <input type="text" placeholder="Longitude" asp-for="Venue.Coordinate.Longitude" />
+
+        <h2>Latitude</h2>
+        <input type="text" placeholder="Latitude" asp-for="Venue.Coordinate.Latitude" />
+
+        <button type="submit">Add Venue</button>
+    </form>
+</div>
