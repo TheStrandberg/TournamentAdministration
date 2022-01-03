@@ -25,14 +25,16 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Venue> Venues { get; set; }
         public List<Game> Games { get; set; }
         public Tournament Tournament { get; set; }
-                
+        public Game Game { get; set; }
+        public Venue Venue { get; set; }
+
         private async Task GetModelData()
         {
             Venues = await database.Venue.ToListAsync();
             Games = await database.Game.ToListAsync();
         }        
 
-        public async Task<IActionResult> OnPostAsync(Tournament tournament)
+        public async Task<IActionResult> OnPostAsync(Tournament tournament, Game game, Venue venue)
         {
 
             //if (!ModelState.IsValid)

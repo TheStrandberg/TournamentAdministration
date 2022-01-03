@@ -9,7 +9,7 @@
         <h2>Tournament Name</h2>
         <input type="text" placeholder="Name of your tournament" asp-for="Tournament.TournamentName" />
         <h2>Venue</h2>
-        <select name="venue" asp-for="Tournament.Venue.ID">
+        <select name="venue" asp-for="Venue.ID">
             <option value="">Select a venue</option>
             @foreach (var venue in Model.Venues)
             {
@@ -18,7 +18,7 @@
         </select>
         <p>Not in list? - <a asp-page="/Venues/Create">Add Venue</a></p>
         <h2>Game</h2>
-        <select name="game" asp-for="Tournament.Game.ID">
+        <select name="game" asp-for="Game.ID">
             <option value="">Select a game</option>
             @foreach (var game in Model.Games)
             {
