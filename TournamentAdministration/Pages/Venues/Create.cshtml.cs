@@ -25,11 +25,6 @@ namespace TournamentAdministration.Pages.Venues
         public Venue Venue { get; private set; }
         public Coordinate Coordinate { get; private set; }
 
-        private void CreateEmptyVenue()
-        {
-            
-        }
-
         public async Task<IActionResult> OnPostAsync(Venue venue)
         {
 
@@ -55,15 +50,9 @@ namespace TournamentAdministration.Pages.Venues
             //Venue.Coordinate.Latitude = Coordinate.Latitude;
             //Venue.Coordinate.Longitude = Coordinate.Longitude;
 
-
             await database.Venue.AddAsync(Venue);
             await database.SaveChangesAsync();
             return RedirectToPage("/Tournaments/Create", new { venue = venue.ID });
-        }
-
-        public void OnGet()
-        {
-            CreateEmptyVenue();
         }
     }
 }

@@ -24,14 +24,6 @@ namespace TournamentAdministration.Pages.Games
 
         public Game Game { get; set; }
 
-        private void CreateEmptyGame()
-        {
-            Game = new Game
-            {
-
-            };
-        }
-
         public async Task<IActionResult> OnPostAsync(Game game)
         {
 
@@ -40,17 +32,16 @@ namespace TournamentAdministration.Pages.Games
             //    return Page();
             //}
 
+            Game = new Game
+            {
+
+            };
+
             Game.Title = game.Title;
 
             await database.Game.AddAsync(Game);
             await database.SaveChangesAsync();
             return RedirectToPage("./Tournaments/Create", new { game = game.ID });
-        }
-
-        public void OnGet()
-        {
-            CreateEmptyGame();
-            
         }
     }
 }
