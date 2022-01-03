@@ -43,10 +43,7 @@ namespace TournamentAdministration.Pages.Venues
             {
                 VenueName = venue.VenueName,
                 Coordinate = Coordinate
-            };            
-
-            //Venue.Coordinate.Latitude = Coordinate.Latitude;
-            //Venue.Coordinate.Longitude = Coordinate.Longitude;
+            };
 
             await database.Venue.AddAsync(Venue);
             await database.SaveChangesAsync();

@@ -25,24 +25,12 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Venue> Venues { get; set; }
         public List<Game> Games { get; set; }
         public Tournament Tournament { get; set; }
-
-        private void CreateEmptyTournament()
-        {
-            Tournament = new Tournament
-            {
-                UserID = accessControl.LoggedInUserID
-            };
-        }
-
-        private async Task GetVenues()
+                
+        private async Task GetModelData()
         {
             Venues = await database.Venue.ToListAsync();
-        }
-
-        private async Task GetGames()
-        {
             Games = await database.Game.ToListAsync();
-        }
+        }        
 
         public async Task<IActionResult> OnPostAsync(Tournament tournament)
         {
@@ -52,23 +40,24 @@ namespace TournamentAdministration.Pages.Tournaments
             //    return Page();
             //}
 
-            Tournament.TournamentName = tournament.TournamentName;
-            Tournament.EventTime = tournament.EventTime;
-            Tournament.Game = tournament.Game;
-            //Tournament.Players = tournament.Players;
-            Tournament.UserID = tournament.UserID;
-            tournament.Venue = tournament.Venue;
+            Tournament = new Tournament
+            {
+                UserID = accessControl.LoggedInUserID,
+                TournamentName = tournament.TournamentName,
+                EventTime = tournament.EventTime,
+                Game = tournament.Game,
+                Venue = tournament.Venue
+            };
+
 
             await database.Tournament.AddAsync(Tournament);
             await database.SaveChangesAsync();
-            return RedirectToPage("./", new { id = Tournament.ID });
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            CreateEmptyTournament();
-            await GetVenues();
-            await GetGames();
+            await GetModelData();
             return Page();
         }
     }
