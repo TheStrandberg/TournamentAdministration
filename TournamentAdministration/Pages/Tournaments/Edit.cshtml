@@ -1,4 +1,33 @@
 ﻿@page
 @model TournamentAdministration.Pages.Tournaments.EditModel
-@{
-}
+
+<div class="text-center">
+    <h1 class="display-4">Edit Tournament</h1>
+</div>
+<div class="text-left">
+    <form method="post">
+        <h2>Tournament Name</h2>
+        <input type="text" placeholder="@Model.Tournament.TournamentName" asp-for="Tournament.TournamentName" />
+        <h2>Venue</h2>
+        <select asp-for="Venue.ID">
+            <option value="@Model.Tournament.Venue">@Model.Tournament.Venue.VenueName</option>
+            @foreach (var venue in Model.Venues)
+            {
+                <option value=@venue.ID>@venue.VenueName</option>
+            }
+        </select>
+        <p>Not in list? - <a asp-page="/Venues/Create">Add Venue</a></p>
+        <h2>Game</h2>
+        <select asp-for="Game.ID">
+            <option value="@Model.Tournament.Venue">@Model.Tournament.Game.Title</option>
+            @foreach (var game in Model.Games)
+            {
+                <option value=@game.ID>@game.Title</option>
+            }
+        </select>
+        <p>Not in list? - <a asp-page="/Games/Create">Add Game</a></p>
+        <h2>Date</h2>
+        <input type="date" value="@Model.Tournament.EventTime.ToString("yyyy-MM-dd")" asp-for="Tournament.EventTime" />
+        <button type="submit">Save Changes</button>
+    </form>
+</div>

@@ -37,7 +37,8 @@ namespace TournamentAdministration.Pages
             UserTournaments = await database.Tournament
                 .Where(t => t.User.Id == accessControl.LoggedInUserID)
                 .Include(t => t.Venue)
-                .Include(t => t.Game).AsNoTracking().ToListAsync();
+                .Include(t => t.Game)
+                .OrderBy(t => t.EventTime).AsNoTracking().ToListAsync();
         }
     }
 }
