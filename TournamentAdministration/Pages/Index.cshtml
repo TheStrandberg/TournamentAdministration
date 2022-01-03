@@ -9,3 +9,15 @@
     <h1><a asp-page="/Tournaments/Create">Create Tournament</a></h1>
     <h1><a asp-page="/Tournaments/Edit">Edit Tournament</a></h1>
 </div>
+<div class="user-tournaments-list">
+    <h2>Your Tournaments</h2>
+    <ul>
+        @foreach (var tournament in Model.UserTournaments)
+            {
+                <li>
+                    <h3>@tournament.TournamentName - @tournament.Game.Title</h3>
+                    <p>@tournament.EventTime.ToString("yyyy-MM-dd") - @tournament.Venue.VenueName</p>
+                </li>
+            }
+    </ul>
+</div>

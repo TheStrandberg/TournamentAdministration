@@ -24,25 +24,20 @@ namespace TournamentAdministration.Pages
         private readonly TournamentAdminContext database;
         private readonly AccessControl accessControl;
 
-        public List<Tournament> Tournaments { get; private set; }
-
         public IndexModel(TournamentAdminContext database, AccessControl accessControl)
         {
             this.database = database;
             this.accessControl = accessControl;
         }
 
+        public List<Tournament> UserTournaments { get; private set; }
+
         public async Task OnGetAsync()
         {
-            // Start by filtering for only contacts belonging to the logged-in user.
-            var query = database.Tournament.Where(c => c.User.Id == accessControl.LoggedInUserID).AsNoTracking();
-
-            //Tournaments = await query.ToListAsync();
+            UserTournaments = await database.Tournament
+                .Where(t => t.User.Id == accessControl.LoggedInUserID)
+                .Include(t => t.Venue)
+                .Include(t => t.Game).AsNoTracking().ToListAsync();
         }
-
-        //public void OnGet()
-        //{
-
-        //}
     }
 }
