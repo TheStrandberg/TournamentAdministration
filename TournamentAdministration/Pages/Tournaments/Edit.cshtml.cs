@@ -34,6 +34,30 @@ namespace TournamentAdministration.Pages.Tournaments
             Games = await database.Game.ToListAsync();
         }
 
+        public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Game game, Venue venue)
+        {
+            // Error handling/validation might not be needed for this page?
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
+
+            Tournament = await database.Tournament.FindAsync(id);
+
+            if (!accessControl.UserCanAccess(Tournament))
+            {
+                return Forbid();
+            }
+
+            Tournament.TournamentName = tournament.TournamentName;
+            Tournament.EventTime = tournament.EventTime;
+            Tournament.Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync();
+            Tournament.Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync();
+
+            await database.SaveChangesAsync();
+            return RedirectToPage("/Index");
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Tournament = await database.Tournament.FindAsync(id);

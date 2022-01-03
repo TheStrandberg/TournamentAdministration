@@ -53,8 +53,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
             await database.Tournament.AddAsync(Tournament);
             await database.SaveChangesAsync();
-            // Not sure if this is the best redirect, leaving it for now
-            return RedirectToAction("Index", "Home");
+            return RedirectToPage("/Index");
         }
 
         public async Task<IActionResult> OnGetAsync()
