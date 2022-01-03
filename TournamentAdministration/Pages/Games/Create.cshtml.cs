@@ -41,7 +41,7 @@ namespace TournamentAdministration.Pages.Games
 
             await database.Game.AddAsync(Game);
             await database.SaveChangesAsync();
-            return RedirectToPage("./Tournaments/Create", new { game = game.ID });
+            return RedirectToPage("/Tournaments/Create", new { game = game.ID });
         }
     }
 }
