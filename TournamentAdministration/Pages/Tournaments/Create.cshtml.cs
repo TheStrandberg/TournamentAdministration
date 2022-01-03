@@ -25,8 +25,8 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Venue> Venues { get; set; }
         public List<Game> Games { get; set; }
         public Tournament Tournament { get; set; }
-        public Game Game { get; set; }
-        public Venue Venue { get; set; }
+        public Game Game { get; private set; }
+        public Venue Venue { get; private set; }
 
         private async Task GetModelData()
         {
@@ -35,8 +35,8 @@ namespace TournamentAdministration.Pages.Tournaments
         }        
 
         public async Task<IActionResult> OnPostAsync(Tournament tournament, Game game, Venue venue)
-        {
-
+        {            
+            // Error handling/validation might not be needed for this page?
             //if (!ModelState.IsValid)
             //{
             //    return Page();
@@ -47,10 +47,9 @@ namespace TournamentAdministration.Pages.Tournaments
                 UserID = accessControl.LoggedInUserID,
                 TournamentName = tournament.TournamentName,
                 EventTime = tournament.EventTime,
-                Game = tournament.Game,
-                Venue = tournament.Venue
+                Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync(),
+                Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync()
             };
-
 
             await database.Tournament.AddAsync(Tournament);
             await database.SaveChangesAsync();
