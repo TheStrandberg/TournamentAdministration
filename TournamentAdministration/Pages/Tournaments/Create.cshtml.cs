@@ -61,7 +61,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
             await database.Tournament.AddAsync(Tournament);
             await database.SaveChangesAsync();
-            return RedirectToPage("./Details", new { id = Tournament.ID });
+            return RedirectToPage("./", new { id = Tournament.ID });
         }
 
         public async Task<IActionResult> OnGetAsync()

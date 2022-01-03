@@ -22,17 +22,12 @@ namespace TournamentAdministration.Pages.Venues
             this.accessControl = accessControl;
         }
 
-        //public List<Venue> Venues { get; set; }
-        //public List<Game> Games { get; set; }
-        //public Tournament Tournament { get; set; }
         public Venue Venue { get; private set; }
+        public Coordinate Coordinate { get; private set; }
 
         private void CreateEmptyVenue()
         {
-            Venue = new Venue
-            {
-
-            };
+            
         }
 
         public async Task<IActionResult> OnPostAsync(Venue venue)
@@ -43,14 +38,27 @@ namespace TournamentAdministration.Pages.Venues
             //    return Page();
             //}
 
+            Venue = new Venue
+            {
+
+            };
+
+            Coordinate = new Coordinate
+            {
+
+            };
+
             Venue.VenueName = venue.VenueName;
-            Venue.Coordinate.Longitude = venue.Coordinate.Longitude;
-            venue.Coordinate.Latitude = venue.Coordinate.Latitude;
+            Coordinate.Longitude = venue.Coordinate.Longitude;
+            Coordinate.Latitude = venue.Coordinate.Latitude;
+
+            //Venue.Coordinate.Latitude = Coordinate.Latitude;
+            //Venue.Coordinate.Longitude = Coordinate.Longitude;
 
 
             await database.Venue.AddAsync(Venue);
             await database.SaveChangesAsync();
-            return RedirectToPage("./Details", new { venue = venue.ID });
+            return RedirectToPage("/Tournaments/Create", new { venue = venue.ID });
         }
 
         public void OnGet()
