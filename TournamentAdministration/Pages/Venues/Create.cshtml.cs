@@ -25,7 +25,7 @@ namespace TournamentAdministration.Pages.Venues
         public Venue Venue { get; private set; }
         public Coordinate Coordinate { get; private set; }
 
-        public async Task<IActionResult> OnPostAsync(Venue venue)
+        public async Task<IActionResult> OnPostAsync(Venue venue, Coordinate coordinate)
         {
 
             //if (!ModelState.IsValid)
@@ -33,22 +33,21 @@ namespace TournamentAdministration.Pages.Venues
             //    return Page();
             //}
 
-            Venue = new Venue
-            {
-
-            };
-
             Coordinate = new Coordinate
             {
 
             };
 
-            Venue.VenueName = venue.VenueName;
-            Coordinate.Longitude = venue.Coordinate.Longitude;
-            Coordinate.Latitude = venue.Coordinate.Latitude;
+            Coordinate.Longitude = coordinate.Longitude;
+            Coordinate.Latitude = coordinate.Latitude;
 
-            //Venue.Coordinate.Latitude = Coordinate.Latitude;
-            //Venue.Coordinate.Longitude = Coordinate.Longitude;
+            Venue = new Venue
+            {
+
+            };
+
+            Venue.VenueName = venue.VenueName;
+            Venue.Coordinate = venue.Coordinate;
 
             await database.Venue.AddAsync(Venue);
             await database.SaveChangesAsync();
