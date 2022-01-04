@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,14 @@ namespace TournamentAdministration.Data
         public DbSet<Venue> Venue { get; set; }
         public DbSet<Game> Game { get; set; }
         public DbSet<Player> Player { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Venue>()
+                .HasIndex(v => v.VenueName)
+                .IsUnique();
+
+            base.OnModelCreating(builder);
+        }
     }
 }
