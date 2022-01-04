@@ -35,19 +35,15 @@ namespace TournamentAdministration.Pages.Venues
 
             Coordinate = new Coordinate
             {
-
+                Longitude = coordinate.Longitude,
+                Latitude = coordinate.Latitude
             };
-
-            Coordinate.Longitude = coordinate.Longitude;
-            Coordinate.Latitude = coordinate.Latitude;
 
             Venue = new Venue
             {
-
+                VenueName = venue.VenueName,
+                Coordinate = Coordinate
             };
-
-            Venue.VenueName = venue.VenueName;
-            Venue.Coordinate = venue.Coordinate;
 
             await database.Venue.AddAsync(Venue);
             await database.SaveChangesAsync();
