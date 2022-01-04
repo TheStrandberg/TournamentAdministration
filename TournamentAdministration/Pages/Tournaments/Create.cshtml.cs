@@ -42,18 +42,27 @@ namespace TournamentAdministration.Pages.Tournaments
             //    return Page();
             //}
 
-            Tournament = new Tournament
+            if (tournament.EventTime < DateTime.Today)
             {
-                UserID = accessControl.LoggedInUserID,
-                TournamentName = tournament.TournamentName,
-                EventTime = tournament.EventTime,
-                Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync(),
-                Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync()
-            };
+                ViewData["Message"] = ("Tournament date cant be earlier than today");
+                await GetModelData();
+                return Page();
+            }
+            else
+            {
+                Tournament = new Tournament
+                {
+                    UserID = accessControl.LoggedInUserID,
+                    TournamentName = tournament.TournamentName,
+                    EventTime = tournament.EventTime,
+                    Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync(),
+                    Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync()
+                };
 
-            await database.Tournament.AddAsync(Tournament);
-            await database.SaveChangesAsync();
-            return RedirectToPage("/Index");
+                await database.Tournament.AddAsync(Tournament);
+                await database.SaveChangesAsync();
+                return RedirectToPage("/Index");
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()

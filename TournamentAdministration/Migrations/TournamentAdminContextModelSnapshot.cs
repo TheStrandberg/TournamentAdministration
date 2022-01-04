@@ -328,6 +328,9 @@ namespace TournamentAdministration.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("VenueName")
+                        .IsUnique();
+
                     b.ToTable("Venue");
                 });
 

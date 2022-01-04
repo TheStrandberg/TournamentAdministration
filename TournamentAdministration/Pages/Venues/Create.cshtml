@@ -9,12 +9,19 @@
         <h2>Venue Name</h2>
         <input type="text" placeholder="Venue Name" asp-for="Venue.VenueName" />
 
-        <h2>Longitude</h2>        
+        <h2>Longitude</h2>
         <input type="text" placeholder="Longitude" asp-for="Coordinate.Longitude" />
-        
+
         <h2>Latitude</h2>
         <input type="text" placeholder="Latitude" asp-for="Coordinate.Latitude" />
 
         <button type="submit">Add Venue</button>
+
+        @if (ViewData["Message"] != null)
+        {
+            <script type="text/javascript">
+            alert("@ViewData["Message"]");
+            </script>
+        }
     </form>
 </div>

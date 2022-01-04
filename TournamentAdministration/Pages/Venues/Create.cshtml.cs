@@ -31,23 +31,33 @@ namespace TournamentAdministration.Pages.Venues
             //if (!ModelState.IsValid)
             //{
             //    return Page();
-            //}
+            //};
 
-            Coordinate = new Coordinate
+            var result = database.Venue.FirstOrDefault(n => n.VenueName == venue.VenueName);
+
+            if (result == null)
             {
-                Longitude = coordinate.Longitude,
-                Latitude = coordinate.Latitude
-            };
+                Coordinate = new Coordinate
+                {
+                    Longitude = coordinate.Longitude,
+                    Latitude = coordinate.Latitude
+                };
 
-            Venue = new Venue
+                Venue = new Venue
+                {
+                    VenueName = venue.VenueName,
+                    Coordinate = Coordinate
+                };
+
+                await database.Venue.AddAsync(Venue);
+                await database.SaveChangesAsync();
+                return RedirectToPage("/Tournaments/Create", new { venue = venue.ID });
+            }
+            else
             {
-                VenueName = venue.VenueName,
-                Coordinate = Coordinate
-            };
-
-            await database.Venue.AddAsync(Venue);
-            await database.SaveChangesAsync();
-            return RedirectToPage("/Tournaments/Create", new { venue = venue.ID });
+                ViewData["Message"] = ("Venue name already exists");
+                return Page();
+            }
         }
     }
 }

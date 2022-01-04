@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TournamentAdministration.Migrations
 {
-    public partial class First : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -313,6 +313,12 @@ namespace TournamentAdministration.Migrations
                 name: "IX_Tournament_VenueID",
                 table: "Tournament",
                 column: "VenueID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Venue_Venue",
+                table: "Venue",
+                column: "Venue",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

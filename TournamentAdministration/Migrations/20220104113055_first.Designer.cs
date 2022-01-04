@@ -10,8 +10,8 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20211223113702_First")]
-    partial class First
+    [Migration("20220104113055_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,6 +329,9 @@ namespace TournamentAdministration.Migrations
                         .HasColumnName("Venue");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("VenueName")
+                        .IsUnique();
 
                     b.ToTable("Venue");
                 });
