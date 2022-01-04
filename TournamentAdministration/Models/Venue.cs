@@ -16,6 +16,7 @@ namespace TournamentAdmin.Models
         [Required]
         public Coordinate Coordinate { get; set; }
     }
+
     [Owned]
     public class Coordinate
     {
