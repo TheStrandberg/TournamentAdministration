@@ -35,16 +35,24 @@ namespace TournamentAdministration.Pages.Tournaments
         }        
 
         public async Task<IActionResult> OnPostAsync(Tournament tournament, Game game, Venue venue)
-        {            
+        {
             // Error handling/validation might not be needed for this page?
             //if (!ModelState.IsValid)
             //{
             //    return Page();
             //}
 
+            var result = database.Tournament.FirstOrDefault(t => t.TournamentName == tournament.TournamentName);
+
             if (tournament.EventTime < DateTime.Today)
             {
-                ViewData["Message"] = ("Tournament date cant be earlier than today");
+                ViewData["Message"] = "Tournament date cant be earlier than today";
+                await GetModelData();
+                return Page();
+            }
+            else if (result != null)
+            {
+                ViewData["Message"] = "Tournament name already exists";
                 await GetModelData();
                 return Page();
             }

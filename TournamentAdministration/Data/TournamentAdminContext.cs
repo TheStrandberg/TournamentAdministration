@@ -26,6 +26,10 @@ namespace TournamentAdministration.Data
                 .HasIndex(v => v.VenueName)
                 .IsUnique();
 
+            builder.Entity<Tournament>()
+                .HasIndex(n => n.TournamentName)
+                .IsUnique();
+
             base.OnModelCreating(builder);
         }
     }
