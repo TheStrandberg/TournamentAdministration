@@ -11,37 +11,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TournamentAdministration.Pages.Tournaments
 {
-    public class EditModel : PageModel
+    public class PlayersModel : PageModel
     {
         private readonly TournamentAdminContext database;
         private readonly AccessControl accessControl;
 
-        public EditModel(TournamentAdminContext database, AccessControl accessControl)
+        public PlayersModel(TournamentAdminContext database, AccessControl accessControl)
         {
             this.database = database;
             this.accessControl = accessControl;
         }
 
-        public List<Venue> Venues { get; set; }
-        public List<Game> Games { get; set; }
         public Tournament Tournament { get; set; }
-        public Game Game { get; private set; }
-        public Venue Venue { get; private set; }
+        public Player Player { get; private set; }
 
-        private async Task GetModelData()
+        public async Task<IActionResult> OnPostAsync(int id, Tournament Tournament, Player player)
         {
-            Venues = await database.Venue.ToListAsync();
-            Games = await database.Game.ToListAsync();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Game game, Venue venue)
-        {
-            // Error handling/validation might not be needed for this page?
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             Tournament = await database.Tournament.FindAsync(id);
 
             if (!accessControl.UserCanAccess(Tournament))
@@ -49,14 +34,11 @@ namespace TournamentAdministration.Pages.Tournaments
                 return Forbid();
             }
 
-            Tournament.TournamentName = tournament.TournamentName;
-            Tournament.EventTime = tournament.EventTime;
-            Tournament.Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync();
-            Tournament.Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync();
-
+            Tournament.Players.Add(player);
             await database.SaveChangesAsync();
-            return RedirectToPage("/Index");
-        }        
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -68,7 +50,6 @@ namespace TournamentAdministration.Pages.Tournaments
                 return Forbid();
             }
 
-            await GetModelData();
             return Page();
         }
     }

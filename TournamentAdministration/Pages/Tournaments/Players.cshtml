@@ -1,0 +1,11 @@
+﻿@page
+@model TournamentAdministration.Pages.Tournaments.PlayersModel
+@{
+}
+
+<form method="post">
+    <input type="text" asp-for="Player.FirstName" />
+    <input type="text" asp-for="Player.LastName" />
+    <input type="text" asp-for="Player.GameHandle" />
+    <button type="submit">Add Player</button>
+</form>
