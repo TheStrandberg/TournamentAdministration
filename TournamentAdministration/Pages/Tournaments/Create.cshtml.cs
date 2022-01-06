@@ -77,6 +77,16 @@ namespace TournamentAdministration.Pages.Tournaments
             }
         }
 
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var tournament = await database.Tournament.FindAsync(id);
+
+            database.Tournament.Remove(tournament);
+            await database.SaveChangesAsync();
+            await GetModelData();
+            return RedirectToPage("/Index");
+        }
+
         public async Task<IActionResult> OnGetAsync()
         {
             await GetModelData();

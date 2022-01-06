@@ -5,7 +5,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Add Player</h1>
+    <h1 class="display-4">Manage Players</h1>
 </div>
 <div class="text-left">
     <form method="post">
@@ -17,6 +17,25 @@
         <input type="text" placeholder="Hometown" asp-for="Player.HomeTown" />
         <button type="submit">Add Player</button>
     </form>
+
+    <h2>Players</h2>
+    <label asp-for="Player.ID">
+        @foreach (var player in Model.Players)
+        {
+            <input type="checkbox">
+            <label value=@player.ID>
+
+                @player.FirstName @player.LastName (@player.GameHandle) -
+                @player.CountryOfOrigin (@player.HomeTown): 
+                <a asp-page="/Tournaments/AddPlayers" onclick="return confirm
+                    ('Are you sure you want to delete this player?');"
+                   asp-page-handler="Delete" asp-route-id="@player.ID">Delete</a> -
+                <a asp-page="/Tournaments/AddPlayers" asp-route-id="@player.ID"> Edit</a>
+
+            </label>
+            <br>
+        }
+    </label>
 
     @if (ViewData["Message"] != null)
     {

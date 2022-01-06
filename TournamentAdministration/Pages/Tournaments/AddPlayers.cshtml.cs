@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
 
@@ -21,6 +22,12 @@ namespace TournamentAdministration.Pages.Tournaments
         }
 
         public Player Player { get; set; }
+        public List<Player> Players { get; set; }
+
+        private async Task GetModelData()
+        {
+            Players = await database.Player.ToListAsync();
+        }
 
         public async Task<IActionResult> OnPostAsync(Player player)
         {
@@ -41,7 +48,24 @@ namespace TournamentAdministration.Pages.Tournaments
 
             await database.Player.AddAsync(Player);
             await database.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Tournaments/AddPlayers");
         }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var player = await database.Player.FindAsync(id);
+
+            database.Player.Remove(player);
+            await database.SaveChangesAsync();
+            await GetModelData();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            await GetModelData();
+            return Page();
+        }
+
     }
 }
