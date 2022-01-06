@@ -13,6 +13,8 @@ namespace TournamentAdmin.Models
         public int ID { get; set; }
         [Required, MaxLength(100)]
         public string TournamentName { get; set; }
+        [Required, MaxLength(150)]
+        public string Description { get; set; }
         [Required, Column(TypeName="date")]
         public DateTime EventTime { get; set; }
         public List<Player> Players { get; set; }

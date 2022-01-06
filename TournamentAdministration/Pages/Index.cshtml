@@ -6,8 +6,9 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>    
+    <h1 class="display-4">Welcome</h1>
     <h1><a asp-page="/Tournaments/Create">Create Tournament</a></h1>
+    <h1><a asp-page="/Tournaments/AddPlayers">Add Players</a></h1>
 </div>
 
     <h2>Your Tournaments</h2>
@@ -17,10 +18,10 @@
             {
                 <li>
                     <h3>@tournament.TournamentName</h3>
-                    <h4>Game - @tournament.Game.Title</h4>
-                    <p>Game Description here?</p>
-                    <p>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</p>
-                    <p>Venue: @tournament.Venue.VenueName</p>
+                    <h6>Game: @tournament.Game.Title</h6>
+                    <p>@tournament.Description</p>
+                    <h6>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h6>
+                    <h6>Venue: @tournament.Venue.VenueName</h6>
                     <h6><a asp-page="/Tournaments/Edit" asp-route-id="@tournament.ID"> - Edit Tournament</a></h6>
                     <h6><a asp-page="/Tournaments/Delete" asp-route-id="@tournament.ID"> - Delete Tournament</a></h6>
                     <p></p>

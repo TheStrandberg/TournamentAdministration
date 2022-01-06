@@ -1,0 +1,29 @@
+﻿@page
+@model TournamentAdministration.Pages.Tournaments.AddPlayersModel
+@{
+    ViewData["Title"] = "Add Players";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Add Player</h1>
+</div>
+<div class="text-left">
+    <form method="post">
+        <h2>Player Info</h2>
+        <input type="text" placeholder="First Name" asp-for="Player.FirstName" />
+        <input type="text" placeholder="Last Name" asp-for="Player.LastName" />
+        <input type="text" placeholder="Gaming Handle / Nickname" asp-for="Player.GameHandle" />
+        <input type="text" placeholder="Country" asp-for="Player.CountryOfOrigin" />
+        <input type="text" placeholder="Hometown" asp-for="Player.HomeTown" />
+        <button type="submit">Add Player</button>
+    </form>
+
+    @if (ViewData["Message"] != null)
+    {
+        <script>
+                    alert("@ViewData["Message"]")
+        </script>
+    }
+</div>
+
+

@@ -15,6 +15,10 @@ namespace TournamentAdmin.Models
         public string LastName { get; set; }
         [MaxLength(50)]
         public string GameHandle { get; set; }
+        [Required, MaxLength(50)]
+        public string CountryOfOrigin { get; set; }
+        [Required, MaxLength(85)]
+        public string HomeTown { get; set; }
         public List<Tournament> Tournaments { get; set; }
     }
 }

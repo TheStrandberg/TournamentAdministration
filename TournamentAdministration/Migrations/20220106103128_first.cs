@@ -206,7 +206,8 @@ namespace TournamentAdministration.Migrations
                     EventTime = table.Column<DateTime>(type: "date", nullable: false),
                     GameID = table.Column<int>(type: "int", nullable: true),
                     VenueID = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -303,6 +304,12 @@ namespace TournamentAdministration.Migrations
                 name: "IX_Tournament_GameID",
                 table: "Tournament",
                 column: "GameID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tournament_TournamentName",
+                table: "Tournament",
+                column: "TournamentName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tournament_UserID",
