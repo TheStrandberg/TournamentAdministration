@@ -4,8 +4,20 @@
 }
 
 <form method="post">
-    <input type="text" asp-for="Player.FirstName" />
-    <input type="text" asp-for="Player.LastName" />
-    <input type="text" asp-for="Player.GameHandle" />
-    <button type="submit">Add Player</button>
+    <h2>Players</h2>
+    <label asp-for="Player.ID">
+        @foreach (var player in Model.Players)
+        {
+            <input type="checkbox">
+            <label value=@player.ID>
+
+                @player.FirstName @player.LastName (@player.GameHandle) -
+                @player.CountryOfOrigin (@player.HomeTown)
+
+            </label>
+            <br>
+        }
+    </label>
+    <br>
+    <button type="submit">Add Selected Players to Tournament</button>
 </form>

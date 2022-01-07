@@ -24,20 +24,25 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public Tournament Tournament { get; set; }
         public Player Player { get; private set; }
+        public List<Player> Players { get; private set; }
 
-        public async Task<IActionResult> OnPostAsync(int id, Tournament Tournament, Player player)
+        private async Task GetModelData()
         {
-            Tournament = await database.Tournament.FindAsync(id);
+            Players = await database.Player.ToListAsync();
+        }
 
-            if (!accessControl.UserCanAccess(Tournament))
+        public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Player player)
+        {
+            tournament = await database.Tournament.FindAsync(id);
+
+            if (!accessControl.UserCanAccess(tournament))
             {
                 return Forbid();
             }
 
-            Tournament.Players.Add(player);
+            tournament.Players.Add(player);
             await database.SaveChangesAsync();
-
-            return Page();
+            return RedirectToPage("/Index");
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
@@ -50,6 +55,7 @@ namespace TournamentAdministration.Pages.Tournaments
                 return Forbid();
             }
 
+            await GetModelData();
             return Page();
         }
     }

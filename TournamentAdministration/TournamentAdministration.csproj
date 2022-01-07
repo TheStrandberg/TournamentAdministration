@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\NewFolder\**" />
+    <Content Remove="Pages\NewFolder\**" />
+    <EmbeddedResource Remove="Pages\NewFolder\**" />
+    <None Remove="Pages\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\Tournaments\Delete.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Tournaments\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
@@ -17,10 +32,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\NewFolder\" />
   </ItemGroup>
 
 </Project>
