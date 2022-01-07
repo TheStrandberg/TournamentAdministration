@@ -26,6 +26,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<IdentityUser> Users { get; set; }
 
         public string TournamentName { get; set; }
+        public string VenueName { get; set; }
         public string Admin { get; set; }
 
         private async Task<List<Tournament>> GetModelData()
@@ -45,7 +46,7 @@ namespace TournamentAdministration.Pages.Tournaments
             Users = database.Users.ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string tournamentName, string admin)
+        public async Task<IActionResult> OnPostAsync(string tournamentName, string venueName, string admin)
         {
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
@@ -53,6 +54,11 @@ namespace TournamentAdministration.Pages.Tournaments
             if (!(tournamentName == null || tournamentName == ""))
             {
                 tournaments = tournaments.Where(t => t.TournamentName.Contains(tournamentName)).ToList();
+            }
+
+            if (!(venueName == null || venueName == ""))
+            {
+                tournaments = tournaments.Where(t => t.Venue.VenueName.Contains(venueName)).ToList();
             }
 
             if (!(admin == null || admin == ""))
