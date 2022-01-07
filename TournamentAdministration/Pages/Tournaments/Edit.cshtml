@@ -6,28 +6,47 @@
 </div>
 <div class="text-left">
     <form method="post">
-        <h2>Tournament Name</h2>
-        <input type="text" placeholder="@Model.Tournament.TournamentName" asp-for="Tournament.TournamentName" />
+
         <h2>Venue</h2>
         <select asp-for="Venue.ID">
-            <option value="@Model.Tournament.Venue.ID">@Model.Tournament.Venue.VenueName</option>
+            <option value="" disabled selected>Select a venue</option>
             @foreach (var venue in Model.Venues)
             {
                 <option value=@venue.ID>@venue.VenueName</option>
             }
         </select>
         <p>Not in list? - <a asp-page="/Venues/Create">Add Venue</a></p>
+
         <h2>Game</h2>
         <select asp-for="Game.ID">
-            <option value="@Model.Tournament.Game.ID">@Model.Tournament.Game.Title</option>
+            <option value="" disabled selected>Select a game</option>
             @foreach (var game in Model.Games)
             {
                 <option value=@game.ID>@game.Title</option>
             }
         </select>
         <p>Not in list? - <a asp-page="/Games/Create">Add Game</a></p>
+
+        <h2>Game Description</h2>
+        <input type="text" placeholder="Description" asp-for="Tournament.Description" />
+
+        <p></p>
+
+        <h2>Tournament Name</h2>
+        <input type="text" placeholder="Name of your tournament" asp-for="Tournament.TournamentName" />
+
+        <p></p>
+
         <h2>Date</h2>
-        <input type="date" value="@Model.Tournament.EventTime.ToString("yyyy-MM-dd")" asp-for="Tournament.EventTime" />
+        <input type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="Tournament.EventTime" />
         <button type="submit">Save Changes</button>
+
+        @if (ViewData["Message"] != null)
+        {
+            <script type="text/javascript">
+            alert("@ViewData["Message"]");
+            </script>
+        }
+
     </form>
 </div>

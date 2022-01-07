@@ -28,18 +28,18 @@ namespace TournamentAdministration.Controller
             return await database.Tournament.AsNoTracking().OrderBy(t => t.EventTime).ToListAsync();
         }
 
-        [HttpGet("/filter/games")]
-        public async Task<ActionResult<Tournament>> FilterByTournamentGames()
-        {
-            var games = await database.Tournament.OrderBy(g => g.Game.Title).ToListAsync();
+        //[HttpGet("/filter/games")]
+        //public async Task<ActionResult<Tournament>> FilterByTournamentGames()
+        //{
+        //    var games = await database.Tournament.OrderBy(g => g.Game.Title).ToListAsync();
 
-            if (games == null)
-            {
-                return NotFound();
-            }
+        //    if (games == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return games;
-        }
+        //    return games;
+        //}
 
         // GET: api/Tournaments/5
         [HttpGet("{id}")]

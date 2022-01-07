@@ -24,14 +24,17 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public List<Venue> Venues { get; set; }
         public List<Game> Games { get; set; }
+        public List<Player> Players { get; set; }
         public Tournament Tournament { get; set; }
         public Game Game { get; private set; }
         public Venue Venue { get; private set; }
+        public Player Player { get; private set; }
 
         private async Task GetModelData()
         {
             Venues = await database.Venue.ToListAsync();
             Games = await database.Game.ToListAsync();
+            Players = await database.Player.ToListAsync();
         }        
 
         public async Task<IActionResult> OnPostAsync(Tournament tournament, Game game, Venue venue)
@@ -62,6 +65,7 @@ namespace TournamentAdministration.Pages.Tournaments
                 {
                     UserID = accessControl.LoggedInUserID,
                     TournamentName = tournament.TournamentName,
+                    Description = tournament.Description,
                     EventTime = tournament.EventTime,
                     Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync(),
                     Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync()
@@ -71,6 +75,16 @@ namespace TournamentAdministration.Pages.Tournaments
                 await database.SaveChangesAsync();
                 return RedirectToPage("/Index");
             }
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var tournament = await database.Tournament.FindAsync(id);
+
+            database.Tournament.Remove(tournament);
+            await database.SaveChangesAsync();
+            await GetModelData();
+            return RedirectToPage("/Index");
         }
 
         public async Task<IActionResult> OnGetAsync()

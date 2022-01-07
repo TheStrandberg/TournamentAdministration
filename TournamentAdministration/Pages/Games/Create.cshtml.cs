@@ -32,16 +32,24 @@ namespace TournamentAdministration.Pages.Games
             //    return Page();
             //}
 
-            Game = new Game
+            var result = await database.Game.FirstOrDefaultAsync(g => g.Title == game.Title);
+
+            if (result == null)
             {
+                Game = new Game
+                {
+                    Title = game.Title
+                };
 
-            };
-
-            Game.Title = game.Title;
-
-            await database.Game.AddAsync(Game);
-            await database.SaveChangesAsync();
-            return RedirectToPage("/Tournaments/Create", new { game = game.ID });
+                await database.Game.AddAsync(Game);
+                await database.SaveChangesAsync();
+                return RedirectToPage("/Tournaments/Create", new { game = game.ID });
+            }
+            else
+            {
+                ViewData["Message"] = "Game name already exists";
+                return Page();
+            }
         }
     }
 }

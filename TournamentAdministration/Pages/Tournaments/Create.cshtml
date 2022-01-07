@@ -9,7 +9,7 @@
 
         <h2>Venue</h2>
         <select asp-for="Venue.ID">
-            <option value="">Select a venue</option>
+            <option value="" disabled selected>Select a venue</option>
             @foreach (var venue in Model.Venues)
             {
                 <option value=@venue.ID>@venue.VenueName</option>
@@ -19,13 +19,18 @@
 
         <h2>Game</h2>
         <select asp-for="Game.ID">
-            <option value="">Select a game</option>
+            <option value="" disabled selected>Select a game</option>
             @foreach (var game in Model.Games)
             {
                 <option value=@game.ID>@game.Title</option>
             }
         </select>
         <p>Not in list? - <a asp-page="/Games/Create">Add Game</a></p>
+
+        <h2>Game Description</h2>
+        <input type="text" placeholder="Description" asp-for="Tournament.Description" />
+
+        <p></p>
 
         <h2>Tournament Name</h2>
         <input type="text" placeholder="Name of your tournament" asp-for="Tournament.TournamentName" />
@@ -43,4 +48,21 @@
             </script>
         }
     </form>
+
+    <p></p>
+
+    <h2>Players</h2>
+    <label asp-for="Player.ID">
+        @foreach (var player in Model.Players)
+        {
+            <input type="checkbox">
+            <label value=@player.ID>
+                @player.FirstName @player.LastName (@player.GameHandle) -
+                @player.CountryOfOrigin (@player.HomeTown)
+            </label>
+            <br>
+        }
+    </label>
+    <button>Add Players to tournament</button>
+    <p>Not in list? - <a asp-page="/Tournaments/AddPlayers">Add Player</a></p>
 </div>
