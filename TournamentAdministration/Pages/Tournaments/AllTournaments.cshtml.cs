@@ -23,15 +23,44 @@ namespace TournamentAdministration.Pages.Tournaments
         }
 
         public List<Tournament> Tournaments { get; set; }
+        public List<IdentityUser> Users { get; set; }
 
-        private async Task GetModelData()
+        public string TournamentName { get; set; }
+        public string Admin { get; set; }
+
+        private async Task<List<Tournament>> GetModelData()
         {
-            Tournaments = await database.Tournament.ToListAsync();
+            Tournaments = await database.Tournament
+                .Include(t => t.Players)
+                .Include(t => t.Venue)
+                .Include(t => t.Game)
+                .Include(t => t.User).ToListAsync();
+
+            return Tournaments;
         }
 
         public async Task OnGetAsync()
         {
-            await GetModelData();
+            Tournaments = await GetModelData();
+            Users = database.Users.ToList();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string tournamentName, string admin)
+        {
+            var tournaments = await GetModelData();
+            Users = database.Users.ToList();
+
+            if (!(tournamentName == null || tournamentName == ""))
+            {
+                tournaments = tournaments.Where(t => t.TournamentName.Contains(tournamentName)).ToList();
+            }
+
+            if (!(admin == null || admin == ""))
+            {
+                tournaments = tournaments.Where(t => t.User.Id == admin).ToList();
+            }
+            Tournaments = tournaments;
+            return Page();
         }
     }
 }
