@@ -20,12 +20,16 @@ namespace TournamentAdministration.Data
             player.FirstName = "Brad";
             player.LastName = "Pitt";
             player.GameHandle = "The Pittmeister";
+            player.CountryOfOrigin = "USA";
+            player.HomeTown = "LA";
             database.Player.Add(player);
 
             var player2 = new Player();
             player2.FirstName = "Will";
             player2.LastName = "Smith";
             player2.GameHandle = "Woll Smoth";
+            player2.CountryOfOrigin = "USA";
+            player2.HomeTown = "LA";
             database.Player.Add(player2);
 
             var venue = new Venue();
@@ -56,6 +60,7 @@ namespace TournamentAdministration.Data
             tournament.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
             tournament.TournamentName = "Blizz Con";
             tournament.EventTime = DateTime.Now;
+            tournament.Description = "100$ tourney";
             tournament.Game = game;
             tournament.Venue = venue;
             database.Tournament.Add(tournament);
@@ -63,6 +68,7 @@ namespace TournamentAdministration.Data
             var tournament2 = new Tournament();
             tournament2.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
             tournament2.TournamentName = "Dreamhack";
+            tournament2.Description = "100$ tourney";
             tournament2.EventTime = DateTime.Now;
             tournament2.Game = game2;
             tournament2.Venue = venue2;

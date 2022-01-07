@@ -9,8 +9,8 @@
 
         <h2>Venue</h2>
         <select asp-for="Venue.ID">
-            <option value="" disabled selected>Select a venue</option>
-            @foreach (var venue in Model.Venues)
+            <option value="@Model.Tournament.Venue.ID">@Model.Tournament.Venue.VenueName</option>
+            @foreach (var venue in Model.Venues.OrderBy(v => v.VenueName))
             {
                 <option value=@venue.ID>@venue.VenueName</option>
             }
@@ -19,8 +19,8 @@
 
         <h2>Game</h2>
         <select asp-for="Game.ID">
-            <option value="" disabled selected>Select a game</option>
-            @foreach (var game in Model.Games)
+            <option value="@Model.Tournament.Game.ID">@Model.Tournament.Game.Title</option>
+            @foreach (var game in Model.Games.OrderBy(g => g.Title))
             {
                 <option value=@game.ID>@game.Title</option>
             }
