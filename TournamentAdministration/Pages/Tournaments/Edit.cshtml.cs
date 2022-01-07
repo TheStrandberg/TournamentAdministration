@@ -53,6 +53,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
             var result = database.Tournament.FirstOrDefault(t => t.TournamentName == tournament.TournamentName);
 
+
             if (result != null)
             {
                 ViewData["Message"] = "Tournament name already exists";
@@ -78,6 +79,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
         }
 
+
         //public async Task<IActionResult> OnPostPlayerAsync(int id, Player player)
         //{
         //    Tournament = await database.Tournament.FindAsync(id);
@@ -97,7 +99,7 @@ namespace TournamentAdministration.Pages.Tournaments
         {
             Tournament = await database.Tournament.FindAsync(id);
 
-            // Check that the contact actually belongs to the logged-in user.
+            // Check that the tournament actually belongs to the logged-in user.
             if (!accessControl.UserCanAccess(Tournament))
             {
                 return Forbid();
