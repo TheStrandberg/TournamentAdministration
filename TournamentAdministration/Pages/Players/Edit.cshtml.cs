@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
 
-namespace TournamentAdministration.Pages.Tournaments
+namespace TournamentAdministration.Pages.Players
 {
-    public class EditPlayerModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly TournamentAdminContext database;
         private readonly AccessControl accessControl;
 
-        public EditPlayerModel(TournamentAdminContext database, AccessControl accessControl)
+        public EditModel(TournamentAdminContext database, AccessControl accessControl)
         {
             this.database = database;
             this.accessControl = accessControl;
@@ -38,7 +38,7 @@ namespace TournamentAdministration.Pages.Tournaments
             Player.GameHandle = player.GameHandle;
             Player.CountryOfOrigin = player.CountryOfOrigin;
             Player.HomeTown = player.HomeTown;
-           
+
             await database.SaveChangesAsync();
             return RedirectToPage("/Tournaments/AddPlayers");
         }

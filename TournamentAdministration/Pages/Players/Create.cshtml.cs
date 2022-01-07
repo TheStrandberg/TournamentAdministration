@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
 
-namespace TournamentAdministration.Pages.Tournaments
+namespace TournamentAdministration.Pages.Players
 {
-    public class AddPlayersModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly TournamentAdminContext database;
         private readonly AccessControl accessControl;
 
-        public AddPlayersModel(TournamentAdminContext database, AccessControl accessControl)
+        public CreateModel(TournamentAdminContext database, AccessControl accessControl)
         {
             this.database = database;
             this.accessControl = accessControl;
@@ -66,6 +66,5 @@ namespace TournamentAdministration.Pages.Tournaments
             await GetModelData();
             return Page();
         }
-
     }
 }

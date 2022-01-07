@@ -11,8 +11,6 @@ namespace TournamentAdministration.Data
     {
         public static void Initialize(TournamentAdminContext database)
         {
-            database.Venue.RemoveRange();
-
             if (database.Tournament.Any())
             {
                 return;
@@ -55,7 +53,7 @@ namespace TournamentAdministration.Data
             database.Game.Add(game2);
 
             var tournament = new Tournament();
-            tournament.UserID = "744f0449-c85f-4af4-97c9-16dc5c7134f1";
+            tournament.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
             tournament.TournamentName = "Blizz Con";
             tournament.EventTime = DateTime.Now;
             tournament.Game = game;
@@ -63,7 +61,7 @@ namespace TournamentAdministration.Data
             database.Tournament.Add(tournament);
 
             var tournament2 = new Tournament();
-            tournament2.UserID = "744f0449-c85f-4af4-97c9-16dc5c7134f1";
+            tournament2.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
             tournament2.TournamentName = "Dreamhack";
             tournament2.EventTime = DateTime.Now;
             tournament2.Game = game2;
