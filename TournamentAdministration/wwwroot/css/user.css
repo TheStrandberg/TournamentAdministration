@@ -23,6 +23,11 @@
     text-decoration: none;
 }
 
+.management-links a:hover {
+    opacity: 80%;
+}
+
+
 .management-links h1 {
     font-size: 2.2rem;
 }
@@ -65,8 +70,20 @@
     background-color: white;
 }
 
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    justify-content: center;
+}
+
+.user-tournaments-list h2 {
+    text-align: center;
+}
+
 .user-tournaments-list li {
     list-style: none;
+    border: 1px solid black;
 
 }
 
