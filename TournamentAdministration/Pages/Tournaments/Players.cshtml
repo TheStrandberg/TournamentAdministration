@@ -3,21 +3,25 @@
 @{
 }
 
+<h2>Players</h2>
+
 <form method="post">
-    <h2>Players</h2>
-    <label asp-for="Player.ID">
+    <select asp-for="Player.ID">
+        <option value="" disabled selected>Select player</option>
         @foreach (var player in Model.Players)
         {
-            <input type="checkbox">
-            <label value=@player.ID>
-
-                @player.FirstName @player.LastName (@player.GameHandle) -
-                @player.CountryOfOrigin (@player.HomeTown)
-
-            </label>
-            <br>
+            <option value=@player.ID>@player.FirstName @player.LastName (@player.GameHandle)</option>
         }
-    </label>
-    <br>
-    <button type="submit">Add Selected Players to Tournament</button>
+    </select>
+    <button type="submit">Add player</button>
 </form>
+<br>
+<h2>Current Participants</h2>
+<ul>
+    @foreach (var player in Model.Participants)
+    {
+        <li>
+            @player.FirstName @player.LastName (@player.GameHandle)
+        </li>
+    }
+</ul>

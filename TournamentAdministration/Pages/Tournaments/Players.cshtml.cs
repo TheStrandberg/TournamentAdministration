@@ -23,17 +23,25 @@ namespace TournamentAdministration.Pages.Tournaments
         }
 
         public Tournament Tournament { get; set; }
-        public Player Player { get; private set; }
+        public Player Player { get; set; }
         public List<Player> Players { get; private set; }
+        public List<Tournament> Tournaments { get; private set; }
+        public List<Player> Participants { get; private set; }
 
-        private async Task GetModelData()
+
+        private async Task GetModelData(int id)
         {
-            Players = await database.Player.ToListAsync();
+            Tournament = await database.Tournament.FindAsync(id);
+            Players = await database.Player.Include(p => p.Tournaments).ToListAsync();
+            Tournaments = await database.Tournament.Include(t => t.Players).ToListAsync();
+            Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
         }
 
         public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Player player)
         {
-            tournament = await database.Tournament.FindAsync(id);
+            await GetModelData(id);
+            tournament = Tournament;
+            player = await database.Player.FindAsync(player.ID);
 
             if (!accessControl.UserCanAccess(tournament))
             {
@@ -41,13 +49,14 @@ namespace TournamentAdministration.Pages.Tournaments
             }
 
             tournament.Players.Add(player);
+
             await database.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            return Page();
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Tournament = await database.Tournament.FindAsync(id);
+            await GetModelData(id);
 
             // Check that the tournament actually belongs to the logged-in user.
             if (!accessControl.UserCanAccess(Tournament))
@@ -55,7 +64,6 @@ namespace TournamentAdministration.Pages.Tournaments
                 return Forbid();
             }
 
-            await GetModelData();
             return Page();
         }
     }
