@@ -51,6 +51,8 @@ namespace TournamentAdministration.Pages.Tournaments
             tournament.Players.Add(player);
 
             await database.SaveChangesAsync();
+            // Need to fetch data again to display participant list on page properly
+            Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
             return Page();
         }
 
