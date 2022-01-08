@@ -1,0 +1,87 @@
+﻿body {
+    background: linear-gradient(#00ffff, #fff200);
+    display: flex;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.management-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: blue;
+    column-gap: 3rem;
+}
+
+.management-links a:hover {
+    text-decoration: none;
+}
+
+.management-links h1 {
+    font-size: 2.2rem;
+}
+
+.create-div {
+    display: block;
+}
+
+#create {
+    background-image: url("images/hammerandnail.jpg");
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.manage-players-div {
+    display: block;
+}
+
+#manage-players {
+    background-image: url("images/players.jpg");
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.view-tournament-div {
+    display: block;
+}
+
+#view-tournament {
+    background-image: url("images/tournament.jpg");
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.user-tournaments-list {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.user-tournaments-list li {
+    list-style: none;
+
+}
+
+.user-tournaments-list p {
+    font-style: italic;
+}
+
+.user-tournaments-list li h4 {
+    font-size: 1rem;
+}
+
+.user-tournaments-list li h5 {
+    font-size: 0.9rem;
+} 
+
+h2 {
+    font-family: Calibri;
+}
