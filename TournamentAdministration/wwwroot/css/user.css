@@ -1,7 +1,9 @@
 ﻿body {
     background: linear-gradient(#00ffff, #fff200);
-    display: flex;
-    justify-content: center;
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .text-center {
@@ -19,8 +21,9 @@
     column-gap: 3rem;
 }
 
-.management-links a:hover {
+.management-links a {
     text-decoration: none;
+    color: white;
 }
 
 .management-links a:hover {
@@ -32,37 +35,26 @@
     font-size: 2.2rem;
 }
 
-.create-div {
+.create-div, .manage-players-div, .view-tournament-div {
     display: block;
+}
+
+#create, #manage-players, #view-tournament {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
 }
 
 #create {
     background-image: url("images/hammerandnail.jpg");
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-}
-
-.manage-players-div {
-    display: block;
 }
 
 #manage-players {
     background-image: url("images/players.jpg");
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-}
-
-.view-tournament-div {
-    display: block;
 }
 
 #view-tournament {
     background-image: url("images/tournament.jpg");
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
 }
 
 .user-tournaments-list {
@@ -72,9 +64,14 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     justify-content: center;
+    margin-top: 2rem;
+}
+
+.grid li {
+    border: 1px solid black;
 }
 
 .user-tournaments-list h2 {
@@ -84,7 +81,6 @@
 .user-tournaments-list li {
     list-style: none;
     border: 1px solid black;
-
 }
 
 .user-tournaments-list p {
@@ -97,8 +93,12 @@
 
 .user-tournaments-list li h5 {
     font-size: 0.9rem;
-} 
+}
 
 h2 {
     font-family: Calibri;
+}
+
+#player-list {
+    list-style: none;
 }

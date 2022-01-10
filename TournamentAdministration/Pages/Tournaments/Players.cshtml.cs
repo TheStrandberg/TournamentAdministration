@@ -28,6 +28,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Tournament> Tournaments { get; private set; }
         public List<Player> Participants { get; private set; }
 
+        public int UrlID { get; set; }
 
         private async Task GetModelData(int id)
         {
@@ -40,15 +41,35 @@ namespace TournamentAdministration.Pages.Tournaments
         public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Player player)
         {
             await GetModelData(id);
-            tournament = Tournament;
+
+            //Osäker om vi behöver assigna tournament, eftersom vi redan har all info i Tournament
+            //tournament = Tournament;
+
             player = await database.Player.FindAsync(player.ID);
 
-            if (!accessControl.UserCanAccess(tournament))
+            if (!accessControl.UserCanAccess(Tournament))
             {
                 return Forbid();
             }
 
-            tournament.Players.Add(player);
+            Tournament.Players.Add(player);
+
+            await database.SaveChangesAsync();
+            // Need to fetch data again to display participant list on page properly
+            Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id, Tournament tournament, Player player)
+        {
+            player = await database.Player.FindAsync(id);
+
+            //if (!accessControl.UserCanAccess(Tournament))
+            //{
+            //    return Forbid();
+            //}
+
+            Tournament.Players.Remove(player);
 
             await database.SaveChangesAsync();
             // Need to fetch data again to display participant list on page properly

@@ -48,7 +48,8 @@ namespace TournamentAdministration.Pages.Players
 
             await database.Player.AddAsync(Player);
             await database.SaveChangesAsync();
-            return RedirectToPage("/Players/AddPlayers");
+            await GetModelData();
+            return Page();
         }
 
         public async Task<IActionResult> OnGetDelete(int id)

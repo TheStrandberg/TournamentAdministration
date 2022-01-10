@@ -10,11 +10,11 @@
         <input type="text" placeholder="Game Name" asp-for="Game.Title" />
         <button type="submit">Add Game</button>
     </form>
- 
+
     @if (ViewData["Message"] != null)
-            {
-                <script>
+    {
+        <script>
                     alert("@ViewData["Message"]")
-                </script>
-            }
+        </script>
+    }
 </div>

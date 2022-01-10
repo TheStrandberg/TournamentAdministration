@@ -24,10 +24,12 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public List<Tournament> Tournaments { get; set; }
         public List<IdentityUser> Users { get; set; }
-
+        public Tournament Tournament { get; set; }
         public string TournamentName { get; set; }
         public string VenueName { get; set; }
         public string Admin { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         private async Task<List<Tournament>> GetModelData()
         {
@@ -46,10 +48,17 @@ namespace TournamentAdministration.Pages.Tournaments
             Users = database.Users.ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string tournamentName, string venueName, string admin)
+        public async Task<IActionResult> OnPostAsync(string tournamentName, string venueName, string admin, DateTime startDate, DateTime endDate)
         {
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
+
+            if (startDate <= endDate)
+            {
+                tournaments = tournaments.Where(t => t.EventTime >= startDate)
+                    .Where(t => t.EventTime <= endDate)
+                    .ToList();
+            }
 
             if (!(tournamentName == null || tournamentName == ""))
             {

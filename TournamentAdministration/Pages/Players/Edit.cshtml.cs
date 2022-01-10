@@ -40,7 +40,7 @@ namespace TournamentAdministration.Pages.Players
             Player.HomeTown = player.HomeTown;
 
             await database.SaveChangesAsync();
-            return RedirectToPage("/Tournaments/AddPlayers");
+            return RedirectToPage("/Players/Create");
         }
 
         public async Task<IActionResult> OnGetAsync(int id)

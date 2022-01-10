@@ -14,6 +14,14 @@
         <h2>Venue Name</h2>
         <input type="text" placeholder="Venue name" asp-for="VenueName" />
 
+        <h2>Start Date</h2>
+        <input type="Date" value="" asp-for="StartDate" />
+
+        <h2>End Date</h2>
+        <input type="Date" value="" asp-for="EndDate" />
+
+
+
         <h2>Admin</h2>
         <select asp-for="Admin">
             <option value=""></option>
@@ -22,21 +30,24 @@
                 <option value=@user.Id>@user.Email</option>
             }
         </select>
-
+        <p></p>
+        <br />
         <button type="submit">Find</button>
     </form>    
 </div>
 
-<ul>
+<div class="grid">
+
     @foreach (var tournament in Model.Tournaments)
     {
-        <li>
-            <h3>@tournament.TournamentName</h3>
-            <h6>Game: @tournament.Game.Title</h6>
-            <p>@tournament.Description</p>
-            <h6>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h6>
-            <h6>Venue: @tournament.Venue.VenueName</h6>
-            <p></p>
-        </li>
+        <ul>
+            <li>
+                <h3>@tournament.TournamentName</h3>
+                <h4>Game: @tournament.Game.Title</h4>
+                <p>Description: @tournament.Description</p>
+                <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
+                <h4>Venue: @tournament.Venue.VenueName</h4>
+            </li>
+        </ul>
     }
-</ul>
+</div>
