@@ -23,7 +23,7 @@ namespace TournamentAdministration.Pages.Venues
         }
 
         public Venue Venue { get; set; }
-        public List<Venue> Venues { get; set; }
+        public List<Venue> Venues { get; private set; }
         public Coordinate Coordinate { get; private set; }
 
         private async Task GetModelData()

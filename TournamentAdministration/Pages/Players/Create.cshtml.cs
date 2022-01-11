@@ -31,12 +31,6 @@ namespace TournamentAdministration.Pages.Players
 
         public async Task<IActionResult> OnPostAsync(Player player)
         {
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             Player = new Player
             {
                 FirstName = player.FirstName,

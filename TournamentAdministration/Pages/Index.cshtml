@@ -55,11 +55,9 @@
                     <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
                     <h4>Venue: @tournament.Venue.VenueName</h4>
                     <h5><a asp-page="/Tournaments/Edit" asp-route-id="@tournament.ID">Edit Tournament</a></h5>
-                    <h5>
-                        <a asp-page="/Tournaments/Create" onclick="return confirm
-                    ('Are you sure you want to delete this tournament?');"
-                           asp-page-handler="Delete" asp-route-id="@tournament.ID">Delete Tournament</a>
-                    </h5>
+                    <h5><a asp-page="/Tournaments/Create" onclick="return confirm
+                    ('Are you sure you want to delete this tournament?');" 
+                    asp-page-handler="Delete" asp-route-id="@tournament.ID">Delete Tournament</a></h5>
                     <h5><a asp-page="/Tournaments/Players" asp-route-id="@tournament.ID">Add Players / View Participants</a></h5>
                     <p></p>
                 </li>

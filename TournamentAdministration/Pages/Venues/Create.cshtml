@@ -43,7 +43,8 @@
                     @venue.VenueName (@venue.Coordinate.Longitude, @venue.Coordinate.Latitude) -
                     <a asp-page="/Venues/Create"
                        onclick="return confirm('Are you sure you want to delete this venue?');"
-                       asp-page-handler="Delete" asp-route-id="@venue.ID">Delete</a>
+                       asp-page-handler="Delete" asp-route-id="@venue.ID">Delete</a> -
+                    <a asp-page="/Venues/Edit" asp-route-id="@venue.ID">Edit Venue</a>
 
                 </label>
                 <br>

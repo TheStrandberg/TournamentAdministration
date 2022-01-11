@@ -33,7 +33,8 @@
                     @game.Title -
                     <a asp-page="/Games/Create"
                        onclick="return confirm('Are you sure you want to delete this game?');"
-                       asp-page-handler="Delete" asp-route-id="@game.ID">Delete</a>
+                       asp-page-handler="Delete" asp-route-id="@game.ID">Delete</a> -
+                    <a asp-page="/Games/Edit" asp-route-id="@game.ID"> Edit</a>
 
                 </label>
                 <br>

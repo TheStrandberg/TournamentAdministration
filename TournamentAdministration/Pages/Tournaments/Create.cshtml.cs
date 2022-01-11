@@ -39,12 +39,6 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public async Task<IActionResult> OnPostAsync(Tournament tournament, Game game, Venue venue)
         {
-            // Error handling/validation might not be needed for this page?
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             var result = database.Tournament.FirstOrDefault(t => t.TournamentName == tournament.TournamentName);
 
             if (tournament.EventTime < DateTime.Today)

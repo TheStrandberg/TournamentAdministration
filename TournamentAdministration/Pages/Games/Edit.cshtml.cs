@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
 
-namespace TournamentAdministration.Pages.Players
+namespace TournamentAdministration.Pages.Games
 {
     public class EditModel : PageModel
     {
@@ -21,25 +20,21 @@ namespace TournamentAdministration.Pages.Players
             this.accessControl = accessControl;
         }
 
-        public Player Player { get; set; }
+        public Game Game{ get; set; }
 
-        public async Task<IActionResult> OnPostAsync(int id, Player player)
+        public async Task<IActionResult> OnPostAsync(int id, Game game)
         {
-            Player = await database.Player.FindAsync(id);
+            Game = await database.Game.FindAsync(id);
 
-            Player.FirstName = player.FirstName;
-            Player.LastName = player.LastName;
-            Player.GameHandle = player.GameHandle;
-            Player.CountryOfOrigin = player.CountryOfOrigin;
-            Player.HomeTown = player.HomeTown;
+            Game.Title = game.Title;
 
             await database.SaveChangesAsync();
-            return RedirectToPage("/Players/Create");
+            return RedirectToPage("/Games/Create");
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Player = await database.Player.FindAsync(id);
+            Game = await database.Game.FindAsync(id);
             return Page();
         }
     }
