@@ -10,12 +10,17 @@
         <input type="text" placeholder="Venue Name" asp-for="Venue.VenueName" />
 
         <h2>Longitude</h2>
-        <input type="text" placeholder="Longitude" asp-for="Coordinate.Longitude" />
+        <input type="text" placeholder="Longitude (00,000000)" asp-for="Coordinate.Longitude" />
 
         <h2>Latitude</h2>
-        <input type="text" placeholder="Latitude" asp-for="Coordinate.Latitude" />
-
+        <input type="text" placeholder="Latitude (00,000000)" asp-for="Coordinate.Latitude" />
+        <p></p>
+        <br />
         <button type="submit">Add Venue</button>
+
+        <p></p>
+
+        <a asp-page="/Tournaments/Create">Create Tournament</a>
 
         @if (ViewData["Message"] != null)
         {
@@ -24,4 +29,27 @@
             </script>
         }
     </form>
+
+    <p></p>
+
+    <h2>Venues</h2>
+    <ul id="player-list">
+        @foreach (var venue in Model.Venues)
+        {
+            <li>
+                <input type="checkbox">
+                <label value=@venue.ID>
+
+                    @venue.VenueName (@venue.Coordinate.Longitude, @venue.Coordinate.Latitude) -
+                    <a asp-page="/Venues/Create"
+                       onclick="return confirm('Are you sure you want to delete this venue?');"
+                       asp-page-handler="Delete" asp-route-id="@venue.ID">Delete</a>
+
+                </label>
+                <br>
+            </li>
+        }
+    </ul>
 </div>
+
+

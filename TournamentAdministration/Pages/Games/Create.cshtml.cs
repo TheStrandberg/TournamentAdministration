@@ -23,15 +23,15 @@ namespace TournamentAdministration.Pages.Games
         }
 
         public Game Game { get; set; }
+        public List<Game> Games { get; set; }
+
+        private async Task GetModelData()
+        {
+            Games = await database.Game.ToListAsync();
+        }
 
         public async Task<IActionResult> OnPostAsync(Game game)
         {
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             var result = await database.Game.FirstOrDefaultAsync(g => g.Title == game.Title);
 
             if (result == null)
@@ -43,13 +43,39 @@ namespace TournamentAdministration.Pages.Games
 
                 await database.Game.AddAsync(Game);
                 await database.SaveChangesAsync();
-                return RedirectToPage("/Tournaments/Create", new { game = game.ID });
+                return Page();
             }
             else
             {
                 ViewData["Message"] = "Game name already exists";
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var game = await database.Game.FindAsync(id);
+
+            try
+            {
+                database.Game.Remove(game);
+                await database.SaveChangesAsync();
+            }
+            catch 
+            {
+                ViewData["Message"] = "Game is linked to a tournament. Delete the tournament before deleting the game.";
+                await GetModelData();
+                return Page();
+            }
+
+            await GetModelData();
+            return RedirectToPage("/Games/Create");
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            await GetModelData();
+            return Page();
         }
     }
 }

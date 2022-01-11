@@ -15,10 +15,12 @@
 
   <ItemGroup>
     <Compile Remove="Pages\Tournaments\Delete.cshtml.cs" />
+    <Compile Remove="Pages\Venues\Index.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\Tournaments\Delete.cshtml" />
+    <Content Remove="Pages\Venues\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

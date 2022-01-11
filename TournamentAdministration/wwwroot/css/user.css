@@ -32,16 +32,16 @@
 
 
 .management-links h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
-.create-div, .manage-players-div, .view-tournament-div {
+.create-div, .manage-players-div, .view-tournament-div, .manage-venues-div, manage-games-div {
     display: block;
 }
 
-#create, #manage-players, #view-tournament {
-    width: 10rem;
-    height: 10rem;
+#create, #manage-players, #view-tournament, #manage-venues, #manage-games {
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
 }
 
@@ -53,8 +53,16 @@
     background-image: url("images/players.jpg");
 }
 
+#manage-venues {
+    background-image: url("images/venue.jpg");
+}
+
 #view-tournament {
     background-image: url("images/tournament.jpg");
+}
+
+#manage-games {
+    background-image: url("images/games.jpg");
 }
 
 .user-tournaments-list {

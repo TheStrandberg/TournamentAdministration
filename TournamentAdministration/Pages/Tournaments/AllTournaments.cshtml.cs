@@ -74,6 +74,11 @@ namespace TournamentAdministration.Pages.Tournaments
             {
                 tournaments = tournaments.Where(t => t.User.Id == admin).ToList();
             }
+
+            if (tournamentName == null && venueName == null && admin == null && startDate == endDate) 
+            {
+                tournaments = await GetModelData();
+            }
             Tournaments = tournaments;
             return Page();
         }

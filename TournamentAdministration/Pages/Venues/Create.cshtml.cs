@@ -22,17 +22,17 @@ namespace TournamentAdministration.Pages.Venues
             this.accessControl = accessControl;
         }
 
-        public Venue Venue { get; private set; }
+        public Venue Venue { get; set; }
+        public List<Venue> Venues { get; set; }
         public Coordinate Coordinate { get; private set; }
+
+        private async Task GetModelData()
+        {
+            Venues = await database.Venue.ToListAsync();
+        }
 
         public async Task<IActionResult> OnPostAsync(Venue venue, Coordinate coordinate)
         {
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //};
-
             var result = database.Venue.FirstOrDefault(n => n.VenueName == venue.VenueName);
 
             if (result == null)
@@ -51,13 +51,39 @@ namespace TournamentAdministration.Pages.Venues
 
                 await database.Venue.AddAsync(Venue);
                 await database.SaveChangesAsync();
-                return RedirectToPage("/Tournaments/Create", new { venue = venue.ID });
+                return RedirectToPage("/Venues/Create");
             }
             else
             {
                 ViewData["Message"] = ("Venue name already exists");
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var venue = await database.Venue.FindAsync(id);
+
+            try
+            {
+                database.Venue.Remove(venue);
+                await database.SaveChangesAsync();
+            }
+            catch
+            {
+                ViewData["Message"] = "Venue is linked to a tournament. Delete the tournament before deleting the venue.";
+                await GetModelData();
+                return Page();
+            }
+
+            await GetModelData();
+            return RedirectToPage("/Venues/Create");
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            await GetModelData();
+            return Page();
         }
     }
 }
