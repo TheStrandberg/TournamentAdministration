@@ -43,13 +43,13 @@ namespace TournamentAdministration.Pages.Games
 
                 await database.Game.AddAsync(Game);
                 await database.SaveChangesAsync();
-                return Page();
             }
             else
             {
                 ViewData["Message"] = "Game name already exists";
-                return Page();
             }
+            await GetModelData();
+            return Page();
         }
 
         public async Task<IActionResult> OnGetDelete(int id)

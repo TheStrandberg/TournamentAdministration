@@ -39,6 +39,7 @@
 
         <h2>Date</h2>
         <input type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="Tournament.EventTime" />
+        <p></p>
         <button type="submit">Save Changes</button>
 
         @if (ViewData["Message"] != null)

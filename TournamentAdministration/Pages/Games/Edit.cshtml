@@ -12,5 +12,14 @@
         <h2>Game Info</h2>
         <input type="text" placeholder="Title" asp-for="Game.Title" />
         <button type="submit">Save Changes</button>
+
+        @if (ViewData["Message"] != null)
+        {
+            <script>
+                    alert("@ViewData["Message"]")
+            </script>
+        }
     </form>
 </div>
+
+

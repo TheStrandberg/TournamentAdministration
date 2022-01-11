@@ -26,10 +26,20 @@ namespace TournamentAdministration.Pages.Games
         {
             Game = await database.Game.FindAsync(id);
 
-            Game.Title = game.Title;
+            var result = database.Game.FirstOrDefault(g => g.Title == game.Title);
 
-            await database.SaveChangesAsync();
-            return RedirectToPage("/Games/Create");
+            if (result == null)
+            {
+                Game.Title = game.Title;
+                await database.SaveChangesAsync();
+                return RedirectToPage("/Games/Create");
+            }
+            else
+            {
+                ViewData["Message"] = "Game name already exists";
+                return Page();
+            }
+            
         }
 
         public async Task<IActionResult> OnGetAsync(int id)

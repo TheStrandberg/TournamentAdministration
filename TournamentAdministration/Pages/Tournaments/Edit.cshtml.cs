@@ -38,12 +38,6 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Game game, Venue venue)
         {
-            // Error handling/validation might not be needed for this page?
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             Tournament = await database.Tournament.FindAsync(id);
 
             if (!accessControl.UserCanAccess(Tournament))
@@ -69,6 +63,7 @@ namespace TournamentAdministration.Pages.Tournaments
             {
                 Tournament.TournamentName = tournament.TournamentName;
                 Tournament.EventTime = tournament.EventTime;
+                Tournament.Description = tournament.Description;
                 Tournament.Game = await database.Game.Where(g => g.ID == game.ID).SingleAsync();
                 Tournament.Venue = await database.Venue.Where(v => v.ID == venue.ID).SingleAsync();
 

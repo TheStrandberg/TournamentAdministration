@@ -57,7 +57,7 @@ namespace TournamentAdministration.Data
             database.Game.Add(game2);
 
             var tournament = new Tournament();
-            tournament.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
+            tournament.UserID = "018a734f-a04a-4886-a1c8-8eb99177b0b5";
             tournament.TournamentName = "Blizz Con";
             tournament.EventTime = DateTime.Now;
             tournament.Description = "100$ tourney";
@@ -66,7 +66,7 @@ namespace TournamentAdministration.Data
             database.Tournament.Add(tournament);
 
             var tournament2 = new Tournament();
-            tournament2.UserID = "60b81ff7-4235-49fc-88d7-67ef0821ae61";
+            tournament2.UserID = "018a734f-a04a-4886-a1c8-8eb99177b0b5";
             tournament2.TournamentName = "Dreamhack";
             tournament2.Description = "100$ tourney";
             tournament2.EventTime = DateTime.Now;
