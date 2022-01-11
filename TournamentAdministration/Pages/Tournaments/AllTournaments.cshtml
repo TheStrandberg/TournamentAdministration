@@ -34,17 +34,19 @@
     </form>    
 </div>
 
-<div class="grid">
-    @foreach (var tournament in Model.Tournaments)
-     {
-        <ul>
-            <li>
-                <h3>@tournament.TournamentName</h3>
-                <h4>Game: @tournament.Game.Title</h4>
-                <p>Description: @tournament.Description</p>
-                <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
-                <h4>Venue: @tournament.Venue.VenueName</h4>
-            </li>
-        </ul>
-     }
+<div class="user-tournaments-list">
+    <div class="grid">
+        @foreach (var tournament in Model.Tournaments)
+        {
+            <ul>
+                <li>
+                    <h3>@tournament.TournamentName</h3>
+                    <h4>Game: @tournament.Game.Title</h4>
+                    <p>Description: @tournament.Description</p>
+                    <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
+                    <h4>Venue: @tournament.Venue.VenueName</h4>
+                </li>
+            </ul>
+        }
+    </div>
 </div>

@@ -52,8 +52,15 @@ namespace TournamentAdministration.Pages.Tournaments
         {
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
+            string date = "0001-01-01";
+            var dateAsString = startDate.ToShortDateString();
 
-            if (startDate <= endDate)
+            if (tournamentName == null && venueName == null && admin == null && dateAsString == date)
+            {
+                tournaments = await GetModelData();
+            }
+
+            if (startDate <= endDate && dateAsString != date)
             {
                 tournaments = tournaments.Where(t => t.EventTime >= startDate)
                     .Where(t => t.EventTime <= endDate)
@@ -75,10 +82,6 @@ namespace TournamentAdministration.Pages.Tournaments
                 tournaments = tournaments.Where(t => t.User.Id == admin).ToList();
             }
 
-            if (tournamentName == null && venueName == null && admin == null && startDate == endDate) 
-            {
-                tournaments = await GetModelData();
-            }
             Tournaments = tournaments;
             return Page();
         }
