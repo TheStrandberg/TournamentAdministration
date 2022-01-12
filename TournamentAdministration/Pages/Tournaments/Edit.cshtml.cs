@@ -47,7 +47,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
             var result = database.Tournament.FirstOrDefault(t => t.TournamentName == tournament.TournamentName);
 
-            if (result != null)
+            if (result != null && tournament.TournamentName != Tournament.TournamentName)
             {
                 ViewData["Message"] = "Tournament name already exists";
                 await GetModelData();

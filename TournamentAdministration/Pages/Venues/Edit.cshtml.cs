@@ -31,31 +31,19 @@ namespace TournamentAdministration.Pages.Venues
 
             var result = database.Venue.FirstOrDefault(n => n.VenueName == venue.VenueName);
 
-            //Should be == null but than you cant have same name as before
-            if (result == null)
-            {
-                Venue.Coordinate.Longitude = longitude;
-                Venue.Coordinate.Latitude = latitude;
-                Venue.VenueName = venue.VenueName;
-                //Venue.Coordinate = Coordinate;
-
-                await database.SaveChangesAsync();
-                return RedirectToPage("/Venues/Create");
-            }
-            else if (result != null)
-            {
-                Venue.Coordinate.Longitude = longitude;
-                Venue.Coordinate.Latitude = latitude;
-                Venue.VenueName = venue.VenueName;
-                //Venue.Coordinate = Coordinate;
-
-                await database.SaveChangesAsync();
-                return RedirectToPage("/Venues/Create");
-            }
-            else
+            if (result != null && venue.VenueName != Venue.VenueName)
             {
                 ViewData["Message"] = ("Venue name already exists");
                 return Page();
+            }
+            else
+            {
+                Venue.Coordinate.Longitude = longitude;
+                Venue.Coordinate.Latitude = latitude;
+                Venue.VenueName = venue.VenueName;
+
+                await database.SaveChangesAsync();
+                return RedirectToPage("/Venues/Create");  
             }
         }
 
