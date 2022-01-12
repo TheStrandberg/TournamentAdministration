@@ -18,21 +18,18 @@
 <h2>Current Participants</h2>
 <ul id="player-list">
     @foreach (var player in Model.Participants)
-     {
+    {
         <li>
-            <input type="checkbox">
             <label value=@player.ID>
 
                 @player.FirstName @player.LastName (@player.GameHandle) -
                 @player.CountryOfOrigin (@player.HomeTown) -
                 <a asp-page="/Tournaments/Players" onclick="return confirm
                         ('Are you sure you want to remove this player from the tournament?');"
-                   asp-page-handler="Delete" asp-route-id="@player.ID" >Remove from tournament (not working)</a>
+                   asp-page-handler="Delete" asp-route-id="@player.ID" asp-route-TournamentID="@Model.TournamentID">Remove from tournament (not working)</a>
 
             </label>
             <br>
         </li>
-     }
+    }
 </ul>
-
-<button>Remove from tournament (not working)</button>

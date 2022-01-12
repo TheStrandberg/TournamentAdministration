@@ -21,21 +21,22 @@
     <p></p>
 
     <h2>Players</h2>
-    <label asp-for="Player.ID">
+    <ul id="player-list">
         @foreach (var player in Model.Players)
         {
-            <input type="checkbox">
-            <label value=@player.ID>
+            <li>
+                <label value=@player.ID>
 
-                @player.FirstName @player.LastName (@player.GameHandle) -
-                @player.CountryOfOrigin (@player.HomeTown):
-                <a asp-page="/Players/Create" onclick="return confirm
-                    ('Are you sure you want to delete this player?');"
-                   asp-page-handler="Delete" asp-route-id="@player.ID">Delete</a> -
-                <a asp-page="/Players/Edit" asp-route-id="@player.ID"> Edit</a>
-
-            </label>
-            <br>
+                    @player.FirstName @player.LastName (@player.GameHandle) -
+                    @player.CountryOfOrigin (@player.HomeTown) -
+                    <a asp-page="/Tournaments/Players" onclick="return confirm
+                        ('Are you sure you want to remove this player from the tournament?');"
+                       asp-page-handler="Delete" asp-route-id="@player.ID">Remove from tournament (not working)</a>
+                        <a asp-page="/Players/Edit" asp-route-id="@player.ID"> Edit</a>
+                </label>
+                <br>
+            </li>
         }
-    </label>
+    </ul>
 </div>
+

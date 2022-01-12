@@ -27,8 +27,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Player> Players { get; private set; }
         public List<Tournament> Tournaments { get; private set; }
         public List<Player> Participants { get; private set; }
-
-        public int UrlID { get; set; }
+        public int TournamentID { get; set; }
 
         private async Task GetModelData(int id)
         {
@@ -38,12 +37,9 @@ namespace TournamentAdministration.Pages.Tournaments
             Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id, Tournament tournament, Player player)
+        public async Task<IActionResult> OnPostAsync(int id, Player player)
         {
             await GetModelData(id);
-
-            //Osäker om vi behöver assigna tournament, eftersom vi redan har all info i Tournament
-            //tournament = Tournament;
 
             player = await database.Player.FindAsync(player.ID);
 
@@ -60,14 +56,15 @@ namespace TournamentAdministration.Pages.Tournaments
             return Page();
         }
 
-        public async Task<IActionResult> OnGetDelete(int id, Tournament tournament, Player player)
+        public async Task<IActionResult> OnGetDelete(int id, int tournamentID, Player player)
         {
             player = await database.Player.FindAsync(id);
-
-            //if (!accessControl.UserCanAccess(Tournament))
-            //{
-            //    return Forbid();
-            //}
+            await GetModelData(tournamentID);
+            
+            if (!accessControl.UserCanAccess(Tournament))
+            {
+                return Forbid();
+            }
 
             Tournament.Players.Remove(player);
 
@@ -80,6 +77,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public async Task<IActionResult> OnGetAsync(int id)
         {
             await GetModelData(id);
+            TournamentID = id;
 
             // Check that the tournament actually belongs to the logged-in user.
             if (!accessControl.UserCanAccess(Tournament))

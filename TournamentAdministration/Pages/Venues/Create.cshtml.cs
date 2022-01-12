@@ -28,7 +28,7 @@ namespace TournamentAdministration.Pages.Venues
 
         private async Task GetModelData()
         {
-            Venues = await database.Venue.ToListAsync();
+            Venues = await database.Venue.ToListAsync(); 
         }
 
         public async Task<IActionResult> OnPostAsync(Venue venue, Coordinate coordinate)
