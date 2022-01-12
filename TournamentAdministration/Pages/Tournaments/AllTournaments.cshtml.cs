@@ -9,6 +9,7 @@ using TournamentAdmin.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Windows.Devices.Geolocation;
+//using GeographyTools;
 
 namespace TournamentAdministration.Pages.Tournaments
 {
@@ -32,6 +33,8 @@ namespace TournamentAdministration.Pages.Tournaments
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Distance { get; set; }
+        public Geocoordinate Geocoordinate { get; set; }
+        public string Game { get; set; }
 
         private async Task<List<Tournament>> GetModelData()
         {
@@ -51,23 +54,21 @@ namespace TournamentAdministration.Pages.Tournaments
         }
 
         public async Task<IActionResult> OnPostAsync(string tournamentName, string venueName, 
-            string admin, DateTime startDate, DateTime endDate, int? distance)
+            string admin, DateTime startDate, DateTime endDate, string game)
         {
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
             string date = "0001-01-01";
             var dateAsString = startDate.ToShortDateString();
 
-            if (tournamentName == null && venueName == null && admin == null && dateAsString == date)
+            if (tournamentName == null && venueName == null && admin == null && dateAsString == date && game == null)
             {
                 tournaments = await GetModelData();
             }
 
-            if (distance != null)
+            if (game != null)
             {
-                GeolocationAccessStatus accessStatus = await Geolocator.RequestAccessAsync();
-                // The variable `position` now contains the latitude and longitude.
-                Geoposition position = await new Geolocator().GetGeopositionAsync();
+                tournaments = tournaments.Where(t => t.Game.Title.Contains(game)).ToList();
             }
 
             if (startDate <= endDate && dateAsString != date)

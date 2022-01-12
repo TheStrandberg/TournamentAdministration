@@ -29,9 +29,9 @@
 
                     @player.FirstName @player.LastName (@player.GameHandle) -
                     @player.CountryOfOrigin (@player.HomeTown) -
-                    <a asp-page="/Tournaments/Players" onclick="return confirm
-                        ('Are you sure you want to remove this player from the tournament?');"
-                       asp-page-handler="Delete" asp-route-id="@player.ID">Remove from tournament (not working)</a>
+                    <a asp-page="/Players/Create" onclick="return confirm
+                        ('Are you sure you want to delete this player?');"
+                       asp-page-handler="Delete" asp-route-id="@player.ID">Delete</a> -
                         <a asp-page="/Players/Edit" asp-route-id="@player.ID"> Edit</a>
                 </label>
                 <br>

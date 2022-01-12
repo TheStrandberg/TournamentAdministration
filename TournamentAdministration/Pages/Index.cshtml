@@ -50,7 +50,7 @@
                 <li>
                     <h3>@tournament.TournamentName</h3>
                     <h4>Game: @tournament.Game.Title</h4>
-                    <p>Description: @tournament.Description</p>
+                    <p>@tournament.Description</p>
                     <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
                     <h4>Venue: @tournament.Venue.VenueName</h4>
                     <h5><a asp-page="/Tournaments/Edit" asp-route-id="@tournament.ID">Edit Tournament</a></h5>

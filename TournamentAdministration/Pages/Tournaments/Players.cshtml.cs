@@ -40,7 +40,6 @@ namespace TournamentAdministration.Pages.Tournaments
         public async Task<IActionResult> OnPostAsync(int id, Player player)
         {
             await GetModelData(id);
-
             player = await database.Player.FindAsync(player.ID);
 
             if (!accessControl.UserCanAccess(Tournament))
@@ -49,7 +48,6 @@ namespace TournamentAdministration.Pages.Tournaments
             }
 
             Tournament.Players.Add(player);
-
             await database.SaveChangesAsync();
             // Need to fetch data again to display participant list on page properly
             Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
@@ -58,8 +56,8 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public async Task<IActionResult> OnGetDelete(int id, int tournamentID, Player player)
         {
-            player = await database.Player.FindAsync(id);
             await GetModelData(tournamentID);
+            player = await database.Player.FindAsync(id);
             
             if (!accessControl.UserCanAccess(Tournament))
             {
@@ -67,7 +65,6 @@ namespace TournamentAdministration.Pages.Tournaments
             }
 
             Tournament.Players.Remove(player);
-
             await database.SaveChangesAsync();
             // Need to fetch data again to display participant list on page properly
             Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
