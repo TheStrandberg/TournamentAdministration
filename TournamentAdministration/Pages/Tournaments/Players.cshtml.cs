@@ -27,7 +27,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Player> Players { get; private set; }
         public List<Tournament> Tournaments { get; private set; }
         public List<Player> Participants { get; private set; }
-        public int TournamentID { get; private set; }
+        //public int TournamentID { get; private set; }
 
         private async Task GetModelData(int id)
         {
@@ -54,10 +54,10 @@ namespace TournamentAdministration.Pages.Tournaments
             return Page();
         }
 
-        public async Task<IActionResult> OnGetDelete(int id, int tournamentID, Player player)
+        public async Task<IActionResult> OnGetDelete(int id, int playerID)
         {
-            player = await database.Player.FindAsync(id);
-            await GetModelData(tournamentID);
+            var player = await database.Player.FindAsync(playerID);
+            await GetModelData(id);
 
             if (!accessControl.UserCanAccess(Tournament))
             {
@@ -75,7 +75,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public async Task<IActionResult> OnGetAsync(int id)
         {
             await GetModelData(id);
-            TournamentID = id;
+            //TournamentID = id;
 
             // Check that the tournament actually belongs to the logged-in user.
             if (!accessControl.UserCanAccess(Tournament))

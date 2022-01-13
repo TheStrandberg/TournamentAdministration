@@ -19,15 +19,15 @@
 <ul id="player-list">
     @foreach (var player in Model.Participants)
      {
-        <li>
+        <li>            
             <label value=@player.ID>
 
                 @player.FirstName @player.LastName (@player.GameHandle) -
                 @player.CountryOfOrigin (@player.HomeTown) -
                 <a asp-page="/Tournaments/Players" onclick="return confirm
                         ('Are you sure you want to remove this player from the tournament?');"
-                   asp-page-handler="Delete" asp-route-id="@player.ID"
-                   asp-route-TournamentID="@Model.TournamentID">Remove from tournament</a>
+                   asp-page-handler="Delete" asp-route-id="@Model.Tournament.ID" 
+                   asp-route-playerID="@player.ID">Remove from tournament</a>
 
             </label>
             <br>
