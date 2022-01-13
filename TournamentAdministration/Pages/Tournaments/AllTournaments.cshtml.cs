@@ -42,7 +42,8 @@ namespace TournamentAdministration.Pages.Tournaments
                 .Include(t => t.Players)
                 .Include(t => t.Venue)
                 .Include(t => t.Game)
-                .Include(t => t.User).ToListAsync();
+                .Include(t => t.User)
+                .OrderBy(t => t.EventTime).ToListAsync();
 
             return Tournaments;
         }
@@ -69,7 +70,7 @@ namespace TournamentAdministration.Pages.Tournaments
 
             if (!(venueName == null || venueName == ""))
             {
-                tournaments = tournaments.Where(t => t.Venue.VenueName.Contains(venueName)).ToList();
+                tournaments = tournaments.Where(t => t.Venue.VenueName.ToLower().Contains(venueName.ToLower())).ToList();
             }
 
             if (startDateAsString != date || endDateAsString != date)
