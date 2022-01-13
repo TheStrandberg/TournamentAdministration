@@ -27,7 +27,7 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Player> Players { get; private set; }
         public List<Tournament> Tournaments { get; private set; }
         public List<Player> Participants { get; private set; }
-        public int TournamentID { get; set; }
+        public int TournamentID { get; private set; }
 
         private async Task GetModelData(int id)
         {
@@ -56,9 +56,9 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public async Task<IActionResult> OnGetDelete(int id, int tournamentID, Player player)
         {
-            await GetModelData(tournamentID);
             player = await database.Player.FindAsync(id);
-            
+            await GetModelData(tournamentID);
+
             if (!accessControl.UserCanAccess(Tournament))
             {
                 return Forbid();
@@ -68,6 +68,7 @@ namespace TournamentAdministration.Pages.Tournaments
             await database.SaveChangesAsync();
             // Need to fetch data again to display participant list on page properly
             Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
+            //return RedirectToPage("/Tournaments/Players", new { TournamentID = tournamentID });
             return Page();
         }
 

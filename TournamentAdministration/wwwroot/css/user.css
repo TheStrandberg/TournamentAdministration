@@ -17,6 +17,10 @@
     justify-content: center;
     align-items: center;
     column-gap: 3rem;
+    background: linear-gradient(to right bottom, rgba(255,255,255, 0.7), rgba(255,255,255, 0.3));
+    border-radius: 1rem 1rem 1rem 1rem;
+    padding: 2rem;
+    margin-top: 1rem;
 }
 
 .management-links a {
@@ -30,7 +34,7 @@
 
 
 .management-links h1 {
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 
 .create-div, .manage-players-div, .view-tournament-div, .manage-venues-div, manage-games-div {
@@ -38,8 +42,8 @@
 }
 
 #create, #manage-players, #view-tournament, #manage-venues, #manage-games {
-    width: 8rem;
-    height: 8rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
 }
 
@@ -64,20 +68,21 @@
 }
 
 .user-tournaments-list {
-    /*border: 1px solid black;*/
     background: linear-gradient(to right bottom, rgba(255,255,255, 0.7), rgba(255,255,255, 0.3));
-    /*backdrop-filter: blur(1rem);*/
     border-radius: 1rem 1rem 1rem 1rem;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /*grid-template-rows: auto;*/
     justify-content: center;
-    margin-top: 2rem;
-    margin-left: 4rem;
+    margin-top: 4rem;
+    margin-left: 1rem;
     padding: 1rem;
+}
+
+.grid li {
+    margin-top: 2rem;
 }
 
 .user-tournaments-list h2 {
