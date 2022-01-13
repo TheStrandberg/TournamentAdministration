@@ -93,7 +93,7 @@ namespace TournamentAdministration.Data
             database.Game.Add(game3);
 
             Game game4 = new Game();
-            game4.Title = "World of Warcarft";
+            game4.Title = "World of Warcraft";
             database.Game.Add(game4);
 
             Game game5 = new Game();

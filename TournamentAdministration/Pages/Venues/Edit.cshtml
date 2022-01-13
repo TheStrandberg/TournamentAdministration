@@ -11,8 +11,8 @@
     <form method="post">
         <h2>Venue Info</h2>
         <input type="text" placeholder="Venue" asp-for="Venue.VenueName" />
-        <input type="text" placeholder="Longitude (00,00000)" asp-for="Longitude" />
-        <input type="text" placeholder="Latitude (00,00000)" asp-for="Latitude" />
+        <input type="text" placeholder="Longitude (00,00000)" asp-for="Venue.Coordinate.Latitude" />
+        <input type="text" placeholder="Latitude (00,00000)" asp-for="Venue.Coordinate.Longitude" />
         <button type="submit">Save Changes</button>
     </form>
 </div>

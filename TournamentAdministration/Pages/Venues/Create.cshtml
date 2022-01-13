@@ -37,7 +37,6 @@
         @foreach (var venue in Model.Venues)
         {
             <li>
-                <input type="checkbox">
                 <label value=@venue.ID>
 
                     @venue.VenueName (@venue.Coordinate.Longitude, @venue.Coordinate.Latitude) -

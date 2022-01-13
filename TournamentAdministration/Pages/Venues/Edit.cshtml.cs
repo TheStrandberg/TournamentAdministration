@@ -25,7 +25,7 @@ namespace TournamentAdministration.Pages.Venues
         public double Longitude { get; set; }
         public double Latitude { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(int id, Venue venue, double longitude, double latitude)
+        public async Task<IActionResult> OnPostAsync(int id, Venue venue)
         {
             Venue = await database.Venue.FindAsync(id);
 
@@ -38,8 +38,8 @@ namespace TournamentAdministration.Pages.Venues
             }
             else
             {
-                Venue.Coordinate.Longitude = longitude;
-                Venue.Coordinate.Latitude = latitude;
+                Venue.Coordinate.Longitude = venue.Coordinate.Longitude;
+                Venue.Coordinate.Latitude = venue.Coordinate.Latitude;
                 Venue.VenueName = venue.VenueName;
 
                 await database.SaveChangesAsync();
