@@ -7,9 +7,15 @@
 <div class="text-center">
     <h1 class="display-4">Edit Player Profile</h1>
 </div>
-<div class="text-left">
+<div class="text-edit">
     <form method="post">
-        <h2>Player Info</h2>
+        <h2 id="firstname">First Name</h2>
+        <h2 id="lastname">Last Name</h2>
+        <h2 id="gaminghandle">Gaming Handle</h2>
+        <h2 id="country">Country</h2>
+        <h2 id="hometown">Hometown</h2>
+        <br />
+
         <input type="text" placeholder="First Name" asp-for="Player.FirstName" />
         <input type="text" placeholder="Last Name" asp-for="Player.LastName" />
         <input type="text" placeholder="Gaming Handle / Nickname" asp-for="Player.GameHandle" />

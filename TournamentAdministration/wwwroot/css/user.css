@@ -110,3 +110,35 @@ h2 {
     font-family: Calibri;
 }
 
+.text-edit {
+    margin-top: 1rem;
+}
+
+.text-edit input {
+    margin-top: 0.5rem;
+}
+
+.text-edit h2 {
+    display: inline;
+    font-size: 1.2rem;
+}
+
+#lastname {
+    margin-left: 9.5%;
+}
+
+#gaminghandle {
+    margin-left: 9.6%;
+}
+
+#country {
+    margin-left: 6.2%;
+}
+
+#hometown{
+    margin-left: 11.5%;
+}
+
+
+
+
