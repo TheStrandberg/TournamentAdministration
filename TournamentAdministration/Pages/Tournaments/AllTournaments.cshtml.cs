@@ -59,33 +59,34 @@ namespace TournamentAdministration.Pages.Tournaments
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
             string date = "0001-01-01";
-            var dateAsString = startDate.ToShortDateString();
-
-            if (tournamentName == null && venueName == null && admin == null && dateAsString == date && game == null)
-            {
-                tournaments = await GetModelData();
-            }
-
-            if (game != null)
-            {
-                tournaments = tournaments.Where(t => t.Game.Title.Contains(game)).ToList();
-            }
-
-            if (startDate <= endDate && dateAsString != date)
-            {
-                tournaments = tournaments.Where(t => t.EventTime >= startDate)
-                    .Where(t => t.EventTime <= endDate)
-                    .ToList();
-            }
+            var startDateAsString = startDate.ToShortDateString();
+            var endDateAsString = endDate.ToShortDateString();
 
             if (!(tournamentName == null || tournamentName == ""))
             {
-                tournaments = tournaments.Where(t => t.TournamentName.Contains(tournamentName)).ToList();
+                tournaments = tournaments.Where(t => t.TournamentName.ToLower().Contains(tournamentName.ToLower())).ToList();
             }
 
             if (!(venueName == null || venueName == ""))
             {
                 tournaments = tournaments.Where(t => t.Venue.VenueName.Contains(venueName)).ToList();
+            }
+
+            if (startDateAsString != date || endDateAsString != date)
+            {
+                if (endDateAsString != date)
+                {
+                    tournaments = tournaments.Where(t => t.EventTime >= startDate && t.EventTime <= endDate).ToList();
+                }
+                else
+                {
+                    tournaments = tournaments.Where(t => t.EventTime >= startDate).ToList();
+                }
+            }
+
+            if (!(game == null || game == ""))
+            {
+                tournaments = tournaments.Where(t => t.Game.Title.ToLower().Contains(game.ToLower())).ToList();
             }
 
             if (!(admin == null || admin == ""))
