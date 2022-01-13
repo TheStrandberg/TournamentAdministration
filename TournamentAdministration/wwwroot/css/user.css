@@ -25,8 +25,16 @@
 
 .management-links a {
     text-decoration: none;
+}
+
+.management-links a:hover {
     color: white;
 }
+
+.management-links h1 {
+    margin-top: 1rem;
+}
+
 
 .management-links a:hover {
     opacity: 80%;
@@ -139,6 +147,28 @@ h2 {
     margin-left: 11.5%;
 }
 
+@media only screen and (max-width : 767px) {
+    body {
+        
+    }
+
+    .management-links {
+        column-gap: 5%;
+    }
+
+    .management-links h1 {
+        font-size: 1rem;
+    }
+
+    #create, #manage-players, #view-tournament, #manage-venues, #manage-games {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
 
 
