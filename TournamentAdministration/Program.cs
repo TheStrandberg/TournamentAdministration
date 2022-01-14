@@ -14,16 +14,22 @@ namespace TournamentAdministration
 {
     public class Program
     {
-        public static UserManager<IdentityUser> userManager;
+        //private readonly UserManager<IdentityUser> userManager;
+        //private readonly TournamentAdminContext database;
+        //public Program(TournamentAdminContext database, UserManager<IdentityUser> userManager)
+        //{
+        //    this.database = database;
+        //    this.userManager = userManager;
+        //}
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            CreateDbIfNotExists(host);
+            await CreateDbIfNotExists(host);
             host.Run();
         }
 
-        private static void CreateDbIfNotExists(IHost host)
+        public static async Task CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())
             {
@@ -32,7 +38,8 @@ namespace TournamentAdministration
                 try
                 {
                     var context = services.GetRequiredService<TournamentAdminContext>();
-                    Dbinitializer.InitializeAsync(context, userManager);
+                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    await Dbinitializer.InitializeAsync(context, userManager);
                 }
                 catch (Exception ex)
                 {

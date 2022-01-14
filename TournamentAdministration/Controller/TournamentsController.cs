@@ -11,7 +11,7 @@ using System.Device.Location;
 
 namespace TournamentAdministration.Controller
 {
-    [Route("api/tournaments")]
+    [Route("api/Tournaments")]
     [ApiController]
     public class TournamentsController : ControllerBase
     {
@@ -43,39 +43,39 @@ namespace TournamentAdministration.Controller
         //}
 
         // GET: api/Tournaments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Tournament>> GetTournament(int id)
-        {
-            var tournament = await database.Tournament.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Tournament>> GetTournament(int id)
+        //{
+        //    var tournament = await database.Tournament.FindAsync(id);
 
-            if (tournament == null)
-            {
-                return NotFound();
-            }
+        //    if (tournament == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return tournament;
-        }
+        //    return tournament;
+        //}
 
         // GET: api/Tournaments/Near
-        [HttpGet("near")]
-        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(double latitude, double longitude)
-        {
-            var tournamentsInRange = new List<Tournament>();
-            var userCoordinate = new GeoCoordinate(latitude, longitude);
+        //[HttpGet("near")]
+        //public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(double latitude, double longitude)
+        //{
+        //    var tournamentsInRange = new List<Tournament>();
+        //    var userCoordinate = new GeoCoordinate(latitude, longitude);
 
-            foreach (var tournament in database.Tournament.Include(t => t.Venue))
-            {
-                var venueCoordinate = new GeoCoordinate(tournament.Venue.Coordinate.Latitude, tournament.Venue.Coordinate.Longitude);
-                var distance = userCoordinate.GetDistanceTo(venueCoordinate);
+        //    foreach (var tournament in database.Tournament.Include(t => t.Venue))
+        //    {
+        //        var venueCoordinate = new GeoCoordinate(tournament.Venue.Coordinate.Latitude, tournament.Venue.Coordinate.Longitude);
+        //        var distance = userCoordinate.GetDistanceTo(venueCoordinate);
 
-                if (distance < 100000)
-                {
-                    tournamentsInRange.Add(tournament);
-                }                
-            }
+        //        if (distance < 100000)
+        //        {
+        //            tournamentsInRange.Add(tournament);
+        //        }                
+        //    }
 
-            return tournamentsInRange;
-        }
+        //    return tournamentsInRange;
+        //}
 
         // PUT: api/Tournaments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
