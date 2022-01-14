@@ -14,7 +14,7 @@ namespace TournamentAdministration
 {
     public class Program
     {
-        public static UserManager<IdentityUser> UserManager { get; private set; }
+        public UserManager<IdentityUser> userManager;
 
         public static void Main(string[] args)
         {
@@ -32,7 +32,7 @@ namespace TournamentAdministration
                 try
                 {
                     var context = services.GetRequiredService<TournamentAdminContext>();
-                    Dbinitializer.InitializeAsync(context, UserManager);
+                    Dbinitializer.InitializeAsync(context, userManager);
                 }
                 catch (Exception ex)
                 {
