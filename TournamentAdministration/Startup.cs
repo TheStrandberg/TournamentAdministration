@@ -59,6 +59,7 @@ namespace TournamentAdministration
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();

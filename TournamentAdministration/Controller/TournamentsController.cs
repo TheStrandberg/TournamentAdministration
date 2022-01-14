@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
+using System.Device.Location;
 
 namespace TournamentAdministration.Controller
 {
@@ -53,6 +54,27 @@ namespace TournamentAdministration.Controller
             }
 
             return tournament;
+        }
+
+        // GET: api/Tournaments/Near
+        [HttpGet("near")]
+        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(double latitude, double longitude)
+        {
+            var tournamentsInRange = new List<Tournament>();
+            var userCoordinate = new GeoCoordinate(latitude, longitude);
+
+            foreach (var tournament in database.Tournament.Include(t => t.Venue))
+            {
+                var venueCoordinate = new GeoCoordinate(tournament.Venue.Coordinate.Latitude, tournament.Venue.Coordinate.Longitude);
+                var distance = userCoordinate.GetDistanceTo(venueCoordinate);
+
+                if (distance < 100000)
+                {
+                    tournamentsInRange.Add(tournament);
+                }                
+            }
+
+            return tournamentsInRange;
         }
 
         // PUT: api/Tournaments/5
