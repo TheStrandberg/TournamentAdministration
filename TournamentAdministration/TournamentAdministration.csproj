@@ -37,4 +37,10 @@
     <PackageReference Include="Uno.UI" Version="4.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Device">
+      <HintPath>System.Device.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
