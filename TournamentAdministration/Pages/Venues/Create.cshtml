@@ -6,20 +6,28 @@
 </div>
 <div class="text-left">
     <form method="post">
-        <h2>Venue Name</h2>
+        <h2>Venue info</h2>
         <input type="text" placeholder="Venue Name" asp-for="Venue.VenueName" />
-
-        <h2>Longitude</h2>
-        <input type="text" placeholder="Longitude (00,000000)" asp-for="Coordinate.Longitude" />
-
-        <h2>Latitude</h2>
-        <input type="text" placeholder="Latitude (00,000000)" asp-for="Coordinate.Latitude" />
         <p></p>
-        <br />
+        <input type="text" placeholder="Longitude (00,000000)" asp-for="Coordinate.Latitude" />
+        <p></p>
+       
+        <input type="text" placeholder="Latitude (00,000000)" asp-for="Coordinate.Longitude" />
+        <p></p>
+       
+        <input type="text" placeholder="Street" asp-for="Address.Street" />
+        <p></p>
+       
+        <input type="text" placeholder="Postcode" asp-for="Address.Postcode" />
+        <p></p>
+        
+        <input type="text" placeholder="City" asp-for="Address.City" />
+        <p></p>
+      
+        <input type="text" placeholder="Country" asp-for="Address.Country" />
+        <p></p>
         <button type="submit">Add Venue</button>
-
         <p></p>
-
         <a asp-page="/Tournaments/Create">Create Tournament</a>
 
         @if (ViewData["Message"] != null)
@@ -31,6 +39,7 @@
     </form>
 
     <p></p>
+</div>
 
     <h2>Venues</h2>
     <ul id="player-list">
@@ -39,17 +48,26 @@
             <li>
                 <label value=@venue.ID>
 
-                    @venue.VenueName (@venue.Coordinate.Longitude, @venue.Coordinate.Latitude) -
+                    @venue.VenueName 
+                    <br />
+                    @venue.Address.Street 
+                    <br /> 
+                    @venue.Address.Postcode
+                    <br />
+                    @venue.Address.City (@venue.Address.Country)
+                    <br />
+                    (@venue.Coordinate.Latitude @venue.Coordinate.Longitude)
+                    <br />
                     <a asp-page="/Venues/Create"
                        onclick="return confirm('Are you sure you want to delete this venue?');"
                        asp-page-handler="Delete" asp-route-id="@venue.ID">Delete</a> -
-                    <a asp-page="/Venues/Edit" asp-route-id="@venue.ID">Edit Venue</a>
+                    <a asp-page="/Venues/Edit" asp-route-id="@venue.ID">Edit</a>
 
                 </label>
                 <br>
             </li>
         }
     </ul>
-</div>
+@*</div>*@
 
 

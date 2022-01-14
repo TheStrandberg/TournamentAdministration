@@ -10,8 +10,8 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20220106114512_third")]
-    partial class third
+    [Migration("20220114120434_address")]
+    partial class address
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -445,16 +445,49 @@ namespace TournamentAdministration.Migrations
 
             modelBuilder.Entity("TournamentAdmin.Models.Venue", b =>
                 {
-                    b.OwnsOne("TournamentAdmin.Models.Coordinate", "Coordinate", b1 =>
+                    b.OwnsOne("TournamentAdmin.Models.Address", "Address", b1 =>
                         {
                             b1.Property<int>("VenueID")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<int>("ID")
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("City");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Country");
+
+                            b1.Property<int>("Postcode")
                                 .HasColumnType("int")
-                                .HasColumnName("CoordinateID");
+                                .HasColumnName("Postcode");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("Street");
+
+                            b1.HasKey("VenueID");
+
+                            b1.ToTable("Venue");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VenueID");
+                        });
+
+                    b.OwnsOne("TournamentAdmin.Models.Coordinate", "Coordinate", b1 =>
+                        {
+                            b1.Property<int>("VenueID")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<double>("Latitude")
                                 .HasColumnType("float")
@@ -471,6 +504,9 @@ namespace TournamentAdministration.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("VenueID");
                         });
+
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Coordinate")
                         .IsRequired();

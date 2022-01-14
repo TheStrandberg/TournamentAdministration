@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TournamentAdministration.Data;
 
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    partial class TournamentAdminContextModelSnapshot : ModelSnapshot
+    [Migration("20220114115915_moreadress")]
+    partial class moreadress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,7 +445,7 @@ namespace TournamentAdministration.Migrations
 
             modelBuilder.Entity("TournamentAdmin.Models.Venue", b =>
                 {
-                    b.OwnsOne("TournamentAdmin.Models.Address", "Address", b1 =>
+                    b.OwnsOne("TournamentAdmin.Models.Adress", "Adress", b1 =>
                         {
                             b1.Property<int>("VenueID")
                                 .ValueGeneratedOnAdd()
@@ -503,7 +505,7 @@ namespace TournamentAdministration.Migrations
                                 .HasForeignKey("VenueID");
                         });
 
-                    b.Navigation("Address")
+                    b.Navigation("Adress")
                         .IsRequired();
 
                     b.Navigation("Coordinate")

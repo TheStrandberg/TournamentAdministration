@@ -99,11 +99,11 @@
 
 .user-tournaments-list li {
     list-style: none;
-    /*border: 1px solid black;*/
 }
 
 .user-tournaments-list p {
     font-style: italic;
+    line-height: 10px;
 }
 
 .user-tournaments-list li h4 {
@@ -145,6 +145,10 @@ h2 {
 
 #hometown{
     margin-left: 11.5%;
+}
+
+#player-list li {
+  list-style: none;
 }
 
 @media only screen and (max-width : 767px) {

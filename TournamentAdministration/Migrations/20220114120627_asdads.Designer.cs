@@ -10,8 +10,8 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20220106103128_first")]
-    partial class first
+    [Migration("20220114120627_asdads")]
+    partial class asdads
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,6 +260,11 @@ namespace TournamentAdministration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CountryOfOrigin")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -268,6 +273,11 @@ namespace TournamentAdministration.Migrations
                     b.Property<string>("GameHandle")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("HomeTown")
+                        .IsRequired()
+                        .HasMaxLength(85)
+                        .HasColumnType("nvarchar(85)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -287,7 +297,9 @@ namespace TournamentAdministration.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("EventTime")
                         .HasColumnType("date");
@@ -433,16 +445,46 @@ namespace TournamentAdministration.Migrations
 
             modelBuilder.Entity("TournamentAdmin.Models.Venue", b =>
                 {
-                    b.OwnsOne("TournamentAdmin.Models.Coordinate", "Coordinate", b1 =>
+                    b.OwnsOne("TournamentAdmin.Models.Address", "Address", b1 =>
                         {
                             b1.Property<int>("VenueID")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<int>("ID")
+                            b1.Property<string>("City")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("City");
+
+                            b1.Property<string>("Country")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Country");
+
+                            b1.Property<int>("Postcode")
                                 .HasColumnType("int")
-                                .HasColumnName("CoordinateID");
+                                .HasColumnName("Postcode");
+
+                            b1.Property<string>("Street")
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("Street");
+
+                            b1.HasKey("VenueID");
+
+                            b1.ToTable("Venue");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VenueID");
+                        });
+
+                    b.OwnsOne("TournamentAdmin.Models.Coordinate", "Coordinate", b1 =>
+                        {
+                            b1.Property<int>("VenueID")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<double>("Latitude")
                                 .HasColumnType("float")
@@ -459,6 +501,9 @@ namespace TournamentAdministration.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("VenueID");
                         });
+
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Coordinate")
                         .IsRequired();

@@ -15,16 +15,29 @@ namespace TournamentAdmin.Models
         public string VenueName { get; set; }
         [Required]
         public Coordinate Coordinate { get; set; }
+        [Required]
+        public Address Address { get; set; }
     }
 
     [Owned]
     public class Coordinate
     {
-        [Column("CoordinateID")]
-        public int ID { get; set; }
         [Column("Latitude")]
         public double Latitude { get; set; }
         [Column("Longitude")]
         public double Longitude { get; set; }
+    }
+
+    [Owned]
+    public class Address
+    {
+        [Required, MaxLength(50), Column("Street")]
+        public string Street { get; set; }
+        [Column("Postcode")]
+        public int Postcode { get; set; }
+        [Required, MaxLength(100), Column("City")]
+        public string City { get; set; }
+        [Required, MaxLength(100), Column("Country")]
+        public string Country { get; set; }
     }
 }

@@ -10,9 +10,20 @@
 <div class="text-left">
     <form method="post">
         <h2>Venue Info</h2>
-        <input type="text" placeholder="Venue" asp-for="Venue.VenueName" />
-        <input type="text" placeholder="Longitude (00,00000)" asp-for="Venue.Coordinate.Latitude" />
-        <input type="text" placeholder="Latitude (00,00000)" asp-for="Venue.Coordinate.Longitude" />
+        <input type="text" placeholder="Venue Name" asp-for="Venue.VenueName" />
+        <p></p>
+        <input type="text" placeholder="Longitude (00,000000)" asp-for="Venue.Coordinate.Latitude" />
+        <p></p>
+        <input type="text" placeholder="Latitude (00,000000)" asp-for="Venue.Coordinate.Longitude" />
+        <p></p>
+        <input type="text" placeholder="Street" asp-for="Venue.Address.Street" />
+        <p></p>
+        <input type="text" placeholder="Postcode (00000)" asp-for="Venue.Address.Postcode" />
+        <p></p>
+        <input type="text" placeholder="City" asp-for="Venue.Address.City" />
+        <p></p>
+        <input type="text" placeholder="Country" asp-for="Venue.Address.Country" />
+        <p></p>
         <button type="submit">Save Changes</button>
     </form>
 </div>

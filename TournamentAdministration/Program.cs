@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,8 @@ namespace TournamentAdministration
 {
     public class Program
     {
+        public static UserManager<IdentityUser> UserManager { get; private set; }
+
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -29,7 +32,7 @@ namespace TournamentAdministration
                 try
                 {
                     var context = services.GetRequiredService<TournamentAdminContext>();
-                    Dbinitializer.Initialize(context);
+                    Dbinitializer.InitializeAsync(context, UserManager);
                 }
                 catch (Exception ex)
                 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,20 @@ namespace TournamentAdministration.Data
 {
     public class Dbinitializer
     {
-        public static void Initialize(TournamentAdminContext database)
+        public static void InitializeAsync(TournamentAdminContext database, UserManager<IdentityUser> userManager)
         {
             if (database.Tournament.Any())
             {
                 return;
+            }
+
+            if (!database.Users.Any())
+            {
+                var testEmail = "test.user@example.com";
+                var testUser = new IdentityUser(testEmail);
+                testUser.Email = testEmail;
+                testUser.EmailConfirmed = true;
+                userManager.CreateAsync(testUser, "Test123!");
             }
 
             var player = new Player();
@@ -54,6 +64,12 @@ namespace TournamentAdministration.Data
             coordinate.Latitude = 59.293602;
             coordinate.Longitude = 18.083185;
             venue.Coordinate = coordinate;
+            Address address = new Address();
+            address.Street = "Globenområdet";
+            address.Postcode = 12177;
+            address.City = "Stockholm";
+            address.Country = "Sweden";
+            venue.Address = address;
             database.Venue.Add(venue);
 
             var venue2 = new Venue();
@@ -62,6 +78,12 @@ namespace TournamentAdministration.Data
             coordinate2.Latitude = 57.699378;
             coordinate2.Longitude = 11.98765;
             venue2.Coordinate = coordinate2;
+            Address address2 = new Address();
+            address2.Street = "Valhallagatan 1";
+            address2.Postcode = 41251;
+            address2.City = "Gothenburg";
+            address2.Country = "Sweden";
+            venue2.Address = address2;
             database.Venue.Add(venue2);
 
             var venue3 = new Venue();
@@ -70,6 +92,12 @@ namespace TournamentAdministration.Data
             coordinate3.Latitude = 57.788732;
             coordinate3.Longitude = 14.229022;
             venue3.Coordinate = coordinate3;
+            Address address3 = new Address();
+            address3.Street = "Elmiavägen 15";
+            address3.Postcode = 55454;
+            address3.City = "Jönköping";
+            address3.Country = "Sweden";
+            venue3.Address = address3;
             database.Venue.Add(venue3);
 
             var venue4 = new Venue();
@@ -78,6 +106,12 @@ namespace TournamentAdministration.Data
             coordinate4.Latitude = 55.613293;
             coordinate4.Longitude = 12.976356;
             venue4.Coordinate = coordinate4;
+            Address address4 = new Address();
+            address4.Street = "Lilla Varvsgatan 14";
+            address4.Postcode = 21115;
+            address4.City = "Malmö";
+            address4.Country = "Sweden";
+            venue4.Address = address4;
             database.Venue.Add(venue4);
 
             Game game = new Game();
@@ -89,7 +123,7 @@ namespace TournamentAdministration.Data
             database.Game.Add(game2);
 
             Game game3 = new Game();
-            game3.Title = "Diablo II";
+            game3.Title = "DOTA";
             database.Game.Add(game3);
 
             Game game4 = new Game();
@@ -99,6 +133,10 @@ namespace TournamentAdministration.Data
             Game game5 = new Game();
             game5.Title = "League of Legends";
             database.Game.Add(game5);
+
+            Game game6 = new Game();
+            game6.Title = "Diablo II Resurrected";
+            database.Game.Add(game6);
 
             var tournament = new Tournament();
             tournament.UserID = "018a734f-a04a-4886-a1c8-8eb99177b0b5";
@@ -120,8 +158,8 @@ namespace TournamentAdministration.Data
 
             var tournament3 = new Tournament();
             tournament3.UserID = "018a734f-a04a-4886-a1c8-8eb99177b0b5";
-            tournament3.TournamentName = "League of Legends, Dreamhack edition";
-            tournament3.Description = "50 teams battle it out for the top prize of 100$";
+            tournament3.TournamentName = "DOTA World Championship";
+            tournament3.Description = "Teams from all over the world see which is best";
             tournament3.EventTime = new DateTime(2022, 08, 12);
             tournament3.Game = game3;
             tournament3.Venue = venue3;
@@ -141,7 +179,7 @@ namespace TournamentAdministration.Data
             tournament5.TournamentName = "Diablo Resurrection Speed Run";
             tournament5.Description = "Come and join some of the most mediocre speedrunners we could find, trying to break the game we all love";
             tournament5.EventTime = new DateTime(2022, 03, 30);
-            tournament5.Game = game5;
+            tournament5.Game = game6;
             tournament5.Venue = venue;
             database.Tournament.Add(tournament5);
 
@@ -153,6 +191,15 @@ namespace TournamentAdministration.Data
             tournament6.Game = game;
             tournament6.Venue = venue2;
             database.Tournament.Add(tournament6);
+
+            var tournament7 = new Tournament();
+            tournament7.UserID = "018a734f-a04a-4886-a1c8-8eb99177b0b5";
+            tournament7.TournamentName = "League of Legends, Dreamhack edition";
+            tournament7.Description = "50 teams battle it out for the top prize of 100$";
+            tournament7.EventTime = new DateTime(2022, 08, 12);
+            tournament7.Game = game5;
+            tournament7.Venue = venue4;
+            database.Tournament.Add(tournament7);
 
             database.SaveChanges();
         }       

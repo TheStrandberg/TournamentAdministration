@@ -67,7 +67,9 @@ namespace TournamentAdministration.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    GameHandle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    GameHandle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CountryOfOrigin = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    HomeTown = table.Column<string>(type: "nvarchar(85)", maxLength: 85, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +83,6 @@ namespace TournamentAdministration.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Venue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CoordinateID = table.Column<int>(type: "int", nullable: false),
                     Latitude = table.Column<double>(type: "float", nullable: false),
                     Longitude = table.Column<double>(type: "float", nullable: false)
                 },
@@ -203,11 +204,11 @@ namespace TournamentAdministration.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TournamentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     EventTime = table.Column<DateTime>(type: "date", nullable: false),
                     GameID = table.Column<int>(type: "int", nullable: true),
                     VenueID = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {

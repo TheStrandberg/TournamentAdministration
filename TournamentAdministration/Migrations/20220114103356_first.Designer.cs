@@ -10,8 +10,8 @@ using TournamentAdministration.Data;
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    [Migration("20220106103724_second")]
-    partial class second
+    [Migration("20220114103356_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,6 +260,11 @@ namespace TournamentAdministration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CountryOfOrigin")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -268,6 +273,11 @@ namespace TournamentAdministration.Migrations
                     b.Property<string>("GameHandle")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("HomeTown")
+                        .IsRequired()
+                        .HasMaxLength(85)
+                        .HasColumnType("nvarchar(85)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -441,10 +451,6 @@ namespace TournamentAdministration.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<int>("ID")
-                                .HasColumnType("int")
-                                .HasColumnName("CoordinateID");
 
                             b1.Property<double>("Latitude")
                                 .HasColumnType("float")

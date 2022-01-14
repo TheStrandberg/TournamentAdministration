@@ -25,13 +25,14 @@ namespace TournamentAdministration.Pages.Venues
         public Venue Venue { get; set; }
         public List<Venue> Venues { get; private set; }
         public Coordinate Coordinate { get; private set; }
+        public Address Address { get; set; }
 
         private async Task GetModelData()
         {
             Venues = await database.Venue.ToListAsync(); 
         }
 
-        public async Task<IActionResult> OnPostAsync(Venue venue, Coordinate coordinate)
+        public async Task<IActionResult> OnPostAsync(Venue venue, Coordinate coordinate, Address adress)
         {
             var result = database.Venue.FirstOrDefault(n => n.VenueName == venue.VenueName);
 
@@ -43,15 +44,25 @@ namespace TournamentAdministration.Pages.Venues
                     Latitude = coordinate.Latitude
                 };
 
+                Address = new Address
+                {
+                    Street = adress.Street,
+                    Postcode = adress.Postcode,
+                    City = adress.City,
+                    Country = adress.Country,
+                };
+
                 Venue = new Venue
                 {
                     VenueName = venue.VenueName,
-                    Coordinate = Coordinate
+                    Coordinate = Coordinate,
+                    Address = Address,
                 };
 
                 await database.Venue.AddAsync(Venue);
                 await database.SaveChangesAsync();
-                return RedirectToPage("/Venues/Create");
+                await GetModelData();
+                return Page();
             }
             else
             {

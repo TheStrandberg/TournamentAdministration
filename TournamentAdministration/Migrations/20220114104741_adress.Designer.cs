@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TournamentAdministration.Data;
 
 namespace TournamentAdministration.Migrations
 {
     [DbContext(typeof(TournamentAdminContext))]
-    partial class TournamentAdminContextModelSnapshot : ModelSnapshot
+    [Migration("20220114104741_adress")]
+    partial class adress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,7 +445,7 @@ namespace TournamentAdministration.Migrations
 
             modelBuilder.Entity("TournamentAdmin.Models.Venue", b =>
                 {
-                    b.OwnsOne("TournamentAdmin.Models.Address", "Address", b1 =>
+                    b.OwnsOne("TournamentAdmin.Models.Adress", "Adress", b1 =>
                         {
                             b1.Property<int>("VenueID")
                                 .ValueGeneratedOnAdd()
@@ -453,24 +455,20 @@ namespace TournamentAdministration.Migrations
                             b1.Property<string>("City")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
-                                .HasColumnName("City");
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
-                                .HasColumnName("Country");
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<int>("Postcode")
-                                .HasColumnType("int")
-                                .HasColumnName("Postcode");
+                                .HasColumnType("int");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("Street");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.HasKey("VenueID");
 
@@ -503,8 +501,7 @@ namespace TournamentAdministration.Migrations
                                 .HasForeignKey("VenueID");
                         });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Adress");
 
                     b.Navigation("Coordinate")
                         .IsRequired();

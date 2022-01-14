@@ -2,7 +2,7 @@
 
 namespace TournamentAdministration.Migrations
 {
-    public partial class halp : Migration
+    public partial class address : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
