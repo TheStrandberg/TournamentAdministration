@@ -14,7 +14,7 @@ namespace TournamentAdministration
 {
     public class Program
     {
-        public UserManager<IdentityUser> userManager;
+        public static UserManager<IdentityUser> userManager;
 
         public static void Main(string[] args)
         {
