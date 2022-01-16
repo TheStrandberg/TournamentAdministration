@@ -50,7 +50,9 @@
                 <li>
                     <h3>@tournament.TournamentName</h3>
                     <h4>@tournament.Game.Title</h4>
-                    <p>@tournament.Description</p>
+                    <div class="tournament-description">
+                        <p>@tournament.Description</p>
+                    </div>
                     <h4>Date: @tournament.EventTime.ToString("yyyy-MM-dd")</h4>
                     <h4>Venue: @tournament.Venue.VenueName</h4>
                     <p>@tournament.Venue.Address.Street</p>
