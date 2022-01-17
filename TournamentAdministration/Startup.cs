@@ -29,7 +29,7 @@ namespace TournamentAdministration
         {
             services.AddDbContext<TournamentAdminContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("TournamentAdminContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<TournamentAdminContext>();
