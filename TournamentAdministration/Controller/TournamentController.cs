@@ -78,9 +78,9 @@ namespace TournamentAdministration.Controller
             foreach (var tournament in tournaments)
             {
                 var venueCoordinate = new GeoCoordinate(tournament.Venue.Coordinate.Latitude, tournament.Venue.Coordinate.Longitude);
-                var realDistance = userCoordinate.GetDistanceTo(venueCoordinate);
+                var actualDistance = userCoordinate.GetDistanceTo(venueCoordinate);
 
-                if (realDistance < distance * 1000)
+                if (actualDistance < distance * 1000)
                 {
                     tournamentsInRange.Add(tournament);
                 }
