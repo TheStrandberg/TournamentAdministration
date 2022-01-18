@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TournamentAdmin.Models;
 using TournamentAdministration.Data;
+using System.Device.Location;
 
 namespace TournamentAdministration.Controller
 {
@@ -65,6 +66,27 @@ namespace TournamentAdministration.Controller
             }
 
             return countries;
+        }
+
+        [HttpGet("/api/Tournaments/near"), AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(int distance, double latitude, double longitude)
+        {
+            var tournaments = await database.Tournament.Include(t => t.Venue).Include(t => t.Game).OrderBy(t => t.EventTime).ToListAsync();
+            var tournamentsInRange = new List<Tournament>();
+            var userCoordinate = new GeoCoordinate(latitude, longitude);
+
+            foreach (var tournament in tournaments)
+            {
+                var venueCoordinate = new GeoCoordinate(tournament.Venue.Coordinate.Latitude, tournament.Venue.Coordinate.Longitude);
+                var realDistance = userCoordinate.GetDistanceTo(venueCoordinate);
+
+                if (realDistance < distance * 1000)
+                {
+                    tournamentsInRange.Add(tournament);
+                }
+            }
+
+            return tournamentsInRange;
         }
     }
 }
