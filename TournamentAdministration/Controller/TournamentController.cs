@@ -72,7 +72,8 @@ namespace TournamentAdministration.Controller
         public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(string name, string game, string venue,
             string country, string city, int? distance, double latitude, double longitude)
         {
-            var tournaments = await database.Tournament.Include(g => g.Game).Include(v => v.Venue).AsNoTracking().OrderBy(t => t.EventTime).ToListAsync();
+            var tournaments = await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
+                .AsNoTracking().OrderBy(t => t.EventTime).ToListAsync();
 
             if (name != null)
             {
