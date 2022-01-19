@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TournamentAdmin.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TournamentAdministration.Data
 {
@@ -26,12 +27,15 @@ namespace TournamentAdministration.Data
                 await userManager.CreateAsync(testUser, "Test123!");
             }
 
+            var players = new List<Player>();
+
             var player = new Player();
             player.FirstName = "Brad";
             player.LastName = "Pitt";
             player.GameHandle = "The Pittmeister";
             player.CountryOfOrigin = "USA";
             player.HomeTown = "Los Angeles";
+            players.Add(player);
             database.Player.Add(player);
 
             var player2 = new Player();
@@ -40,6 +44,7 @@ namespace TournamentAdministration.Data
             player2.GameHandle = "Woll Smoth";
             player2.CountryOfOrigin = "USA";
             player2.HomeTown = "Los Angeles";
+            players.Add(player2);
             database.Player.Add(player2);
 
             var player3 = new Player();
@@ -48,6 +53,7 @@ namespace TournamentAdministration.Data
             player3.GameHandle = "The Destroyer";
             player3.CountryOfOrigin = "Sweden";
             player3.HomeTown = "Degerfors";
+            players.Add(player3);
             database.Player.Add(player3);
 
             var player4 = new Player();
@@ -56,6 +62,7 @@ namespace TournamentAdministration.Data
             player4.GameHandle = "The Witcher";
             player4.CountryOfOrigin = "England";
             player4.HomeTown = "London";
+            players.Add(player4);
             database.Player.Add(player4);
 
             var venue = new Venue();
@@ -200,6 +207,19 @@ namespace TournamentAdministration.Data
             tournament7.Game = game5;
             tournament7.Venue = venue4;
             database.Tournament.Add(tournament7);
+
+            await database.SaveChangesAsync();
+
+            var tournaments = await database.Tournament.Include(t => t.Players).ToListAsync();
+
+            var rand = new Random();
+            foreach (var t in tournaments)
+            {
+                for (int i = 0; i <= rand.Next(5); i++)
+                {
+                    t.Players.Add(players[i]);
+                }
+            }
 
             await database.SaveChangesAsync();
         }       
