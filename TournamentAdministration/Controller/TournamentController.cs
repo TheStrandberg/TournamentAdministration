@@ -24,7 +24,7 @@ namespace TournamentAdministration.Controller
         }        
 
         [HttpGet, AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentNear(string name, string game, string venue,
+        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentsFiltered(string name, string game, string venue,
             string country, string city, int? distance, double latitude, double longitude)
         {
             var tournaments = await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
@@ -77,7 +77,7 @@ namespace TournamentAdministration.Controller
         }
 
         [HttpGet("/api/Tournaments/{id}"), AllowAnonymous]
-        public async Task<ActionResult<Tournament>> FilterByTournamentName(int id)
+        public async Task<ActionResult<Tournament>> GetTournamentById(int id)
         {
             var tournament = await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
                 .AsNoTracking().Where(t => t.ID == id).SingleAsync();
