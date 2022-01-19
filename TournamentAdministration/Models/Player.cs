@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TournamentAdmin.Models
@@ -19,6 +20,7 @@ namespace TournamentAdmin.Models
         public string CountryOfOrigin { get; set; }
         [Required, MaxLength(85)]
         public string HomeTown { get; set; }
+        [JsonIgnore]
         public List<Tournament> Tournaments { get; set; }
     }
 }
