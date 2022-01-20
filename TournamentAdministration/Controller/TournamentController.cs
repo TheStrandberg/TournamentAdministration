@@ -79,10 +79,8 @@ namespace TournamentAdministration.Controller
         [HttpGet("/api/Tournaments/{id}"), AllowAnonymous]
         public async Task<ActionResult<Tournament>> GetTournamentById(int id)
         {
-            var tournament = await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
+            return await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
                 .AsNoTracking().Where(t => t.ID == id).SingleAsync();
-
-            return tournament;
         }
     }
 }
