@@ -211,10 +211,11 @@ namespace TournamentAdministration.Data
             await database.SaveChangesAsync();
 
             var tournaments = await database.Tournament.Include(t => t.Players).ToListAsync();
-
             var rand = new Random();
             foreach (var t in tournaments)
             {
+                // Randomize list order to not always pick same players from list
+                players = players.OrderBy(i => Guid.NewGuid()).ToList();
                 for (int i = 0; i <= rand.Next(5); i++)
                 {
                     t.Players.Add(players[i]);

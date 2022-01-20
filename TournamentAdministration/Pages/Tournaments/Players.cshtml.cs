@@ -27,7 +27,6 @@ namespace TournamentAdministration.Pages.Tournaments
         public List<Player> Players { get; private set; }
         public List<Tournament> Tournaments { get; private set; }
         public List<Player> Participants { get; private set; }
-        //public int TournamentID { get; private set; }
 
         private async Task GetModelData(int id)
         {
@@ -68,14 +67,12 @@ namespace TournamentAdministration.Pages.Tournaments
             await database.SaveChangesAsync();
             // Need to fetch data again to display participant list on page properly
             Participants = await database.Player.Where(p => p.Tournaments.Contains(Tournament)).ToListAsync();
-            //return RedirectToPage("/Tournaments/Players", new { TournamentID = tournamentID });
             return Page();
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             await GetModelData(id);
-            //TournamentID = id;
 
             // Check that the tournament actually belongs to the logged-in user.
             if (!accessControl.UserCanAccess(Tournament))

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-// Inconsistent namespace because we copied the model classes from a previous attempt at this project
+// Inconsistent namespace because we copied the model classes from a previous attempt at this project.
 namespace TournamentAdmin.Models
 {
     public class Game

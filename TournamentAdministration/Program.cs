@@ -14,14 +14,6 @@ namespace TournamentAdministration
 {
     public class Program
     {
-        //private readonly UserManager<IdentityUser> userManager;
-        //private readonly TournamentAdminContext database;
-        //public Program(TournamentAdminContext database, UserManager<IdentityUser> userManager)
-        //{
-        //    this.database = database;
-        //    this.userManager = userManager;
-        //}
-
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();

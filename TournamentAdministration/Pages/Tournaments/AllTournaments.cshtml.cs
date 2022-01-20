@@ -9,7 +9,6 @@ using TournamentAdmin.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Windows.Devices.Geolocation;
-//using GeographyTools;
 
 namespace TournamentAdministration.Pages.Tournaments
 {

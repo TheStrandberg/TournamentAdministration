@@ -20,7 +20,7 @@ namespace TournamentAdmin.Models
         public string CountryOfOrigin { get; set; }
         [Required, MaxLength(85)]
         public string HomeTown { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] // This is to avoid circular reference in JSON in API calls.
         public List<Tournament> Tournaments { get; set; }
     }
 }

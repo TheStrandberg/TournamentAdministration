@@ -20,6 +20,7 @@ namespace TournamentAdministration.Data
         public DbSet<Game> Game { get; set; }
         public DbSet<Player> Player { get; set; }
 
+        // We probably could add more configuration here to protect against edge cases.
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Venue>()
