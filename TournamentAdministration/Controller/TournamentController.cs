@@ -25,7 +25,7 @@ namespace TournamentAdministration.Controller
 
         [HttpGet, AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Tournament>>> GetTournamentsFiltered(string name, string game, string venue,
-            string country, string city, int? distance, double latitude, double longitude, string date)
+            string country, string city, int? distance, double latitude, double longitude, string fromDate, string toDate)
         {
             var tournaments = await database.Tournament.Include(t => t.Game).Include(t => t.Venue).Include(t => t.Players)
                 .AsNoTracking().OrderBy(t => t.EventTime).ToListAsync();
@@ -73,12 +73,25 @@ namespace TournamentAdministration.Controller
                 tournaments = tournamentsInRange;
             }
 
-            if (date != null)
+            if (fromDate != null || toDate != null)
             {
-                var formattedDate = DateTime.Parse(date);
-                tournaments = tournaments.Where(t => t.EventTime >= formattedDate).ToList();
-            }
+                var formattedFromDate = DateTime.Today;
 
+                if (fromDate != null)
+                {
+                    formattedFromDate = DateTime.Parse(fromDate);
+                }
+
+                if (toDate != null)
+                {
+                    var formattedToDate = DateTime.Parse(toDate);
+                    tournaments = tournaments.Where(t => t.EventTime >= formattedFromDate && t.EventTime <= formattedToDate).ToList();
+                }
+                else
+                {
+                    tournaments = tournaments.Where(t => t.EventTime >= formattedFromDate).ToList();
+                }
+            }
             return tournaments;
         }
 
