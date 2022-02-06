@@ -25,14 +25,15 @@ namespace TournamentAdministration.Pages.Tournaments
 
         public List<Tournament> Tournaments { get; set; }
         public List<IdentityUser> Users { get; set; }
+        public List<Player> Players { get; set; }
         public Tournament Tournament { get; set; }
+        public int PlayerOne { get; set; }
+        public int PlayerTwo { get; set; }
         public string TournamentName { get; set; }
         public string VenueName { get; set; }
         public string Admin { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Distance { get; set; }
-        public Geocoordinate Geocoordinate { get; set; }
         public string Game { get; set; }
 
         private async Task<List<Tournament>> GetModelData()
@@ -51,13 +52,15 @@ namespace TournamentAdministration.Pages.Tournaments
         {
             Tournaments = await GetModelData();
             Users = database.Users.ToList();
+            Players = database.Player.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string tournamentName, string venueName, 
-            string admin, DateTime startDate, DateTime endDate, string game)
+            string admin, DateTime startDate, DateTime endDate, string game, int? playerOne, int? playerTwo)
         {
             var tournaments = await GetModelData();
             Users = database.Users.ToList();
+            Players = database.Player.ToList();
             string date = "0001-01-01";
             var startDateAsString = startDate.ToShortDateString();
             var endDateAsString = endDate.ToShortDateString();
@@ -92,6 +95,20 @@ namespace TournamentAdministration.Pages.Tournaments
             if (!(admin == null || admin == ""))
             {
                 tournaments = tournaments.Where(t => t.User.Id == admin).ToList();
+            }
+
+            if (playerOne != null || playerTwo != null)
+            {
+                if (playerOne != null)
+                {                    
+                    var player = database.Player.First(p => p.ID == playerOne);
+                    tournaments = tournaments.Where(t => t.Players.Contains(player)).ToList();
+                }
+                if (playerTwo != null)
+                {
+                    var player = database.Player.First(p => p.ID == playerTwo);
+                    tournaments = tournaments.Where(t => t.Players.Contains(player)).ToList();
+                }
             }
 
             Tournaments = tournaments;

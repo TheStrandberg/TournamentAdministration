@@ -32,6 +32,26 @@
             }
         </select>
         <p></p>
+        <h2>Search tournaments for players</h2>
+        <p></p>
+        <p>Player One</p>
+        <select asp-for="PlayerOne">
+            <option value=""></option>
+            @foreach (var player in Model.Players)
+            {
+                <option value=@player.ID>@player.FirstName @player.LastName (@player.GameHandle)</option>
+            }
+        </select>
+        <p></p>
+        <p>Player Two</p>
+        <select asp-for="PlayerTwo">
+            <option value=""></option>
+            @foreach (var player in Model.Players)
+            {
+                <option value=@player.ID>@player.FirstName @player.LastName (@player.GameHandle)</option>
+            }
+        </select>
+        <p></p>
         <br />
         <button type="submit">Find</button>
     </form>    
