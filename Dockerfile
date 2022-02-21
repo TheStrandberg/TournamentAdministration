@@ -7,7 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /TournamentAdministration
 COPY ["TournamentAdministration.csproj", "."]
-RUN dotnet restore ".TournamentAdministration.csproj"
+RUN dotnet restore "./TournamentAdministration.csproj"
 COPY . .
 WORKDIR "/TournamentAdministration/."
 RUN dotnet build "TournamentAdministration.csproj" -c Release -o /TournamentAdministration/build
