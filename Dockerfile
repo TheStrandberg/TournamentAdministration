@@ -9,11 +9,11 @@ WORKDIR /TournamentAdministration/TournamentAdministration
 COPY ["TournamentAdministration.csproj", "."]
 RUN dotnet restore "/TournamentAdministration/TournamentAdministration/TournamentAdministration.csproj"
 COPY . .
-WORKDIR "//TournamentAdministration/TournamentAdministration/."
-RUN dotnet build "TournamentAdministration.csproj" -c Release -o //TournamentAdministration/TournamentAdministration/build
+WORKDIR "/TournamentAdministration/TournamentAdministration/."
+RUN dotnet build "TournamentAdministration.csproj" -c Release -o /TournamentAdministration/TournamentAdministration/build
 
 FROM build AS publish
-RUN dotnet publish "TournamentAdministration.csproj" -c Release -o //TournamentAdministration/TournamentAdministration/publish
+RUN dotnet publish "TournamentAdministration.csproj" -c Release -o /TournamentAdministration/TournamentAdministration/publish
 
 FROM base AS final
 WORKDIR /TournamentAdministration/TournamentAdministration
