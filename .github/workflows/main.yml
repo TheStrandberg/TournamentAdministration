@@ -55,4 +55,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: kubectl rollout restart deployment tournamentdeployment
+          script: |
+            kubectl rollout restart deployment tournamentdeployment
+            kubectl get all
+            ls
