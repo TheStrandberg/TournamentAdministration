@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: automation
 
 # Controls when the workflow will run
 on:
@@ -47,3 +47,12 @@ jobs:
         with:
           push: true
           tags: thestrandberg/tournamentadmin:1.0
+    
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: whoami
