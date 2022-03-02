@@ -46,4 +46,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: thestrandberg/tournamentadmin:1.0
+          tags: thestrandberg/tournamentadmin:2.0
